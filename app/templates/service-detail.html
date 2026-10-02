@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.title }} | Synvora IT{% endblock title %}
+
+{% block content %}
+
+  <header class="page-banner" style="{% if service.banner %}background: linear-gradient(180deg, rgba(10, 13, 22, 0.75) 0%, rgba(10, 13, 22, 0.92) 100%), url('{{ service.banner.url }}') center/cover no-repeat;{% endif %} min-height: 480px;">
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    
+    <div class="banner-container">
+      <div class="banner-content">
+        {% if service.solution %}
+          <div class="banner-badge">
+            <span class="badge-dot"></span>
+            {{ service.solution.title }} Solution
+          </div>
+        {% else %}
+          <div class="banner-badge">
+            <span class="badge-dot"></span>
+            Core IT Service
+          </div>
+        {% endif %}
+
+        <h1 class="banner-title">{{ service.title }}</h1>
+        <p class="banner-subtitle">{{ service.short_description }}</p>
+      </div>
+    </div>
+  </header>
+
+
+  {% if service.technologies.all %}
+  <div class="marquee-band">
+    <div class="marquee-track">
+    
+      {% for tech in service.technologies.all %}
+        <span>{{ tech.name }}</span>
+      {% endfor %}
+      
+      {% for tech in service.technologies.all %}
+        <span>{{ tech.name }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <section class="service-detail-section" style="padding: 60px 0 128px 0;">
+    <div class="wrap">
+      
+      <div class="head-row" style="margin-bottom: 24px;">
+        <h2>Service Overview & Details</h2>
+      </div>
+
+      <div class="service-detail-body" style="color:black">
+        {{ service.description|safe }}
+      </div>
+
+    </div>
+  </section>
+
+{% endblock content %}

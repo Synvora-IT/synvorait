@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Services | Synvora IT
+{% endblock title %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block content %}
+      <section class="page-banner">
+          <div class="bg-glow bg-glow-1"></div>
+          <div class="bg-glow bg-glow-2"></div>
+
+          <div class="banner-container nav-inner">
+              <div class="banner-content">
+                  <div class="banner-badge">
+                      <span class="badge-dot"></span>
+                      <span>Solutions</span>
+                  </div>
+
+                  <h1 class="banner-title">Comprehensive IT services tailored<br>to drive your business forward</h1>
+
+                  <p class="banner-subtitle">
+                      Discover our wide range of professional technology services, crafted with precision to optimize your operations, enhance security, and scale your digital presence.
+                  </p>
+              </div>
+          </div>
+      </section>
+
+      <div class="bg-grid"></div>
+      <div class="bg-decoration bg-circle-1"></div>
+      <div class="bg-decoration bg-circle-2"></div>
+
+      <section class="section-wrapper">
+            <form method='GET' action="{% url 'services' %}" id="searchForm">
+                <div class='input-group'>
+                    <input type='text' placeholder="🔍 Search services..." name="search" oninput="autoSubmit()" id="search" value="{{ request.GET.search }}" style="width: 100%; padding: 16px 20px; font-size: 15px; border-radius: 12px;">
+                </div>
+            </form>
+
+          <div class="card-grid">
+
+            {% for service in services %}
+              <!-- Card 1: UI/UX Design -->
+              <div class="card">
+                {% if service.banner %}
+                  <a href="{% url 'service-detail' service.slug %}"><div class="card-image-wrapper">
+                      <img src="{{service.banner.url}}" alt="{{service.title}}" class="card-image">
+                      <div class="card-image-overlay"></div>
+                  </div></a>
+                {% endif %}
+                  <div class="card-body">
+                      <span class="card-tag">{{service.solution}}</span>
+                      <a href="{% url 'service-detail' service.slug %}"><h3 >{{service.title}}</h3></a>
+                      <p class="card-description" style="color:#36454F">{{service.short_description}}</p>
+                      {% if service.technologies %}
+                        <div class="card-features">
+                          {% for technology in service.technologies.all|slice:'4' %}
+                            <span class="feature-chip" style="color: #708090">{{technology.name}}</span>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                  </div>
+              </div>
+            {% empty %}
+              <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #90939F;">
+                  <p>No services found</p>
+              </div>
+            {% endfor %}
+              
+          </div>
+
+          {% if services.has_other_pages %}
+              <div class="pagination-wrapper" style="margin-top: 60px; display: flex; justify-content: center;">
+                  <nav class="pagination" style="display: flex; gap: 8px; align-items: center;">
+                      
+                      <!-- Previous Page Link -->
+                      {% if services.has_previous %}
+                          <a href="?page={{ services.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="page-btn prev-next">
+                              &laquo; Prev
+                          </a>
+                      {% else %}
+                          <span class="page-btn prev-next disabled" style="opacity: 0.4; cursor: not-allowed;">
+                              &laquo; Prev
+                          </span>
+                      {% endif %}
+
+                      <!-- Next Page Link -->
+                      {% if services.has_next %}
+                          <a href="?page={{ services.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="page-btn prev-next">
+                              Next &raquo;
+                          </a>
+                      {% else %}
+                          <span class="page-btn prev-next disabled" style="opacity: 0.4; cursor: not-allowed;">
+                              Next &raquo;
+                          </span>
+                      {% endif %}
+
+                  </nav>
+              </div>
+          {% endif %}
+      </section>
+
+  
+{% endblock content %}

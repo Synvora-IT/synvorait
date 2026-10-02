@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Synvora IT{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo-icon.png' %}">   
+    {% block css %}
+    {% endblock css %}
+</head>
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="{% url 'index' %}" class="logo">
+      <img src="{% static 'images/logo-full.png' %}" class="logo"></img></span>
+    </a>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+
+      <!--Solutions-->
+      
+      {% if solutions %}
+      <li>
+        <button class="nav-toggle" data-dropdown="solutions">Solutions
+          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <div class="dropdown" id="dd-solutions">
+          <div class="dropdown-grid">
+            {% for solution in solutions %}
+              <a class="dropdown-item" href="#"><div class="name">{{solution.title}}</div><div class="desc">{{solution.short_description}}</div></a>
+            {% endfor %}
+          </div>
+          <div class="dropdown-foot"><a href="{% url 'solutions' %}">Explore all solutions →</a></div>
+        </div>
+      </li>
+      {% endif %}
+
+      <!--Services -->
+
+      {% if services %}
+      <li>
+        <button class="nav-toggle" data-dropdown="services">Services
+          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <div class="dropdown" id="dd-services">
+          <div class="dropdown-grid">
+            {% for service in services %}
+              <a class="dropdown-item" href="#"><div class="name">{{service.title}}</div><div class="desc">{{service.short_description}}</div></a>
+            {% endfor %}
+          </div>
+          <div class="dropdown-foot"><a href="{% url 'services' %}">Explore all services →</a></div>
+        </div>
+      </li>
+      {% endif %}
+
+      <!--Industries-->
+
+      {% if industries %}
+        <li>
+          <button class="nav-toggle" data-dropdown="industries">Industries
+            <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <div class="dropdown" id="dd-industries">
+            <div class="dropdown-grid">
+              {% for industry in industries %}
+                <a class="dropdown-item" href="#">
+                  <div class="name">{{industry.title}}</div>
+                  {% if industry.short_description %}
+                    <div class="desc">{{industry.short_description}}</div>
+                  {% endif %}
+                </a>
+              {% endfor %}
+            </div>
+            <div class="dropdown-foot"><a href="{% url 'industries' %}">Explore all industries →</a></div>
+          </div>
+        </li>
+      {% endif %}
+
+      <li><a class="nav-link" href="{% url 'case-studies' %}">Case Study</a></li>
+      <li><a class="nav-link" href="{% url 'blogs' %}">Blogs</a></li>
+      <li><a class="nav-link" href="#">About</a></li>
+      <li><a class="nav-link" href="{% url 'contact-us' %}">Contact Us</a></li>
+      {% if request.user.is_authenticated %}
+
+        <li>
+          <button class="nav-toggle" data-dropdown="user">{{request.user.get_full_name}}
+            <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <div class="dropdown" id="dd-user">
+            <div class="dropdown-grid">
+              <a class="dropdown-item" href="#">
+                <div class="name">Change Password</div>
+              </a>
+              <a class="dropdown-item" href="{% url 'update-info' %}">
+                <div class="name">Update Info</div>
+              </a>
+
+              {% if request.user.user_type == 'teammate' %}
+                <a class="dropdown-item" href="{% url 'my-projects' %}">
+                  <div class="name">My Projects</div>
+                </a>
+                <a class="dropdown-item" href="{% url 'add-project' %}">
+                  <div class="name">Add Project</div>
+                </a>
+              {% endif %}
+              <a href="{% url 'logout' %}" class="dropdown-item">
+                <div class="name">Logout</div>
+              </a>
+            </div>
+          </div>
+        </li>
+        
+      {% else %}
+        <a href="{% url 'login' %}" class="nav-link">Login <img src="{% static 'images/login.png' %}" class='icon'></a>
+      {% endif %}
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a class="m-link" href="{% url 'index' %}">Home</a>
+
+    {% if solutions %}
+      <div class="m-link m-toggle" data-target="m-solutions">Solutions
+        <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+
+      <div class="m-sub" id="m-solutions">
+        {% for solution in solutions %}
+          <a class="m-sub-item" href="{% url 'solution-detail' solution.slug %}">{{solution.title}}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if industries %}
+      <div class="m-link m-toggle" data-target="m-industries">Industries
+        <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="m-sub" id="m-industries">
+        {% for industry in industries %}
+          <a class="m-sub-item" href="#">{{industry.title}}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <a class="m-link" href="#work">Case Study</a>
+    <a class="m-link" href="{% url 'blogs' %}">Blogs</a>
+    <a class="m-link" href="#">About</a>
+    <a class="m-link" href="{% url 'contact-us' %}">Contact Us</a>
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="m-link">Logout <img src="{% static 'images/logout.png' %}" class='icon'></a>
+      {% else %}
+        <a href="{% url 'login' %}" class="m-link">Login <img src="{% static 'images/login.png' %}" class='icon'></a>
+    {% endif %}
+  </div>
+</nav>
+
+{% block content %}
+
+{% endblock content %}
+
+<!-- FOOTER -->
+<footer>
+
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo"><img src="{% static 'images/logo-full.png' %}" class='logo-footer'></div>
+        <p>We design and develop digital products that help businesses grow, automate, and innovate.</p>
+      </div>
+      {% if solutions %}
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        {% for solution in solutions %}
+          <a href="{% url 'solution-detail' solution.slug %}">{{solution.title}}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#work">Case Study</a>
+        <a href="{% url 'industries' %}">Industries</a>
+        <a href="{% url 'contact-us' %}">Contact Us</a>
+      </div>
+      {% if info %}
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:{{info.email}}">{{info.email}}</a>
+        <a href="tel:{{info.phone}}">{{info.phone}}</a>
+        <a href="#">{{info.location}}</a>
+      </div>
+      {% endif %}
+    </div>
+    
+  </div>
+
+  <div class="wrap">
+    
+    <div class="footer-bottom">
+      <p>© {% now 'Y' %} Synvora IT. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'syn.js' %}"></script>
+
+{% block js %}
+
+{% endblock js %}
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Passenger Configuration
+PassengerAppRoot /home/synvorai/synvorait
+PassengerPython /home/synvorai/virtualenv/synvorait/3.12/bin/python
+PassengerStartupFile passenger_wsgi.py
+

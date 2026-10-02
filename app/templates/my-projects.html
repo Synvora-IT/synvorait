@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{request.user.get_full_name}} | Projects
+{% endblock title %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block content %}
+<div class="bg-grid"></div>
+      <div class="bg-decoration bg-circle-1"></div>
+      <div class="bg-decoration bg-circle-2"></div>
+
+      <section class="section-wrapper">
+            <form method='GET' action="{% url 'my-projects' %}" id="searchForm">
+                <div class='input-group'>
+                    <input type='text' placeholder="Search Project" name="search" oninput="autoSubmit()" id="search"></input>
+                </div>
+            </form>
+
+          <div class="card-grid">
+
+            {% for project in projects %}
+              <!-- Card 1: UI/UX Design -->
+              <div class="card">
+                {% if service.banner %}
+                  <a href="{% url 'project' project.slug %}"><div class="card-image-wrapper">
+                      <img src="{{project.banner.url}}" alt="{{project.title}}" class="card-image">
+                      <div class="card-image-overlay"></div>
+                  </div></a>
+                {% endif %}
+                  <div class="card-body">
+                      <span class="card-tag">{{service.solution}}</span>
+                      <a href="{% url 'project' project.slug %}"><h3 >{{project.title}}</h3></a>
+                      <p class="card-description" style="color:#36454F">{{project.short_description}}</p>
+                      {% if project.technologies %}
+                        <div class="card-features">
+                          {% for technology in project.technologies.all|slice:'4' %}
+                            <span class="feature-chip" style="color: #708090">{{technology.name}}</span>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                  </div>
+              </div>
+            {% endfor %}
+              
+          </div>
+      </section>
+{% endblock content %}

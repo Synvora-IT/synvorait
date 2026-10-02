@@ -1,0 +1,7 @@
+migrations/
+__pycache__/
+media/
+.env
+db.sqlite3
+.htaccess
+passenger_wsgi.py

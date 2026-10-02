@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Contact Us | Synvora IT
+{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <div class="banner-container nav-inner">
+        <div class="banner-content">
+            <div class="banner-badge">
+                <span class="badge-dot"></span>
+                <span>Contact Us</span>
+            </div>
+
+            <h1 class="banner-title">Let’s talk...</h1>
+
+            <p class="banner-subtitle">
+                Send a few details about your project or business, and a real person on the team will get back to you.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="bg-grid"></div>
+<div class="bg-decoration bg-circle-1"></div>
+<div class="bg-decoration bg-circle-2"></div>
+
+<section class="section-wrapper contact-section-wrapper">
+    <div class="contact-grid-container">
+        
+        <div class="contact-form-card" style="width:100%;">
+            <h3 class="contact-form-title">Send us a message</h3>
+            
+            <form method="POST" action="" class="contact-form" id='contactForm'>
+                {% csrf_token %}
+                
+                <div class="form-row">
+                    <div class="input-group-field">
+                        {{form.name.label_tag}}
+                        {{form.name}}
+                    </div>
+                    <div class="input-group-field">
+                        {{form.gender.label_tag}}
+                        {{form.gender}}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group-field">
+                        {{form.phone.label_tag}}
+                        {{form.phone}}
+                    </div>
+                    <div class="input-group-field">
+                        {{form.email.label_tag}}
+                        {{form.email}}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group-field">
+                        {{form.country.label_tag}}
+                        {{form.country}}
+                    </div>
+                    <div class="input-group-field">
+                        {{form.service.label_tag}}
+                        {{form.service}}
+                    </div>
+                </div>
+
+                <div class="input-group-field full-width">
+                    {{form.subject.label_tag}}
+                    {{form.subject}}
+                </div>
+
+                <div class="input-group-field full-width">
+                    {{form.body.label_tag}}
+                    {{form.body}}
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">Send message</button>
+            </form>
+        </div>
+
+        <div class="contact-info-column">
+            
+            <div class="info-card">
+                <h4 class="info-card-title">Contact information</h4>
+                
+                <div class="info-item">
+                    <span class="info-icon">✉️</span>
+                    <div>
+                        <span class="info-label">Email</span>
+                        <a href="mailto:hello@synvorait.com" class="info-value">{{info.email}}</a>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">📞</span>
+                    <div>
+                        <span class="info-label">Phone / WhatsApp</span>
+                        <span class="info-value">{{info.phone}}</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <div>
+                        <span class="info-label">Location</span>
+                        <span class="info-value">{{info.location}}</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">⏰</span>
+                    <div>
+                        <span class="info-label">Working hours</span>
+                        <span class="info-value">Sun – Thu, 10:00 – 19:00 (GMT+6)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-map-card">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d1626.2268666943874!2d90.38486567670287!3d23.79170412250741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sSouth%20Ibrahimpur%2C%20Shimultala%2C%20Dhaka-1206!5e0!3m2!1sen!2sbd!4v1789825178340!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="google-map-iframe">
+                </iframe>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock content %}

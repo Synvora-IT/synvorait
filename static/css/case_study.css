@@ -1,0 +1,732 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap");
+
+@import url("https://fonts.gstatic.com");
+
+@import url("https://fonts.googleapis.com");
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* ================= CASE STUDY STYLES ================= */
+/* =====================================================
+   SYNVORA IT – CASE STUDY SECTION
+   Sob color/font niche variable e ache. Ekhane change korlei hobe.
+   ===================================================== */
+:root{
+  /* 60% light neutral  |  30% deep navy  |  10% accent (+ gold only for the final CTA) */
+  --cs-bg:#F4F6FF;
+  --cs-surface:#FFFFFF;
+  --cs-ink:#0B1230;        /* text on light: 17:1 */
+  --cs-muted:#4A5478;      /* secondary text: 7.5:1 */
+  --cs-line:#D3D9F0;
+  --cs-accent:#5B3DF5;     /* buttons + numbers: 6:1 with white */
+  --cs-accent-soft:#ECE8FF;
+  --cs-gold:#FFC93C;       /* highest-attention CTA, navy text on it: 11:1 */
+  --cs-radius:22px;
+  --cs-display:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --cs-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--cs-body);background:var(--cs-bg);color:var(--cs-ink)}
+
+.cs{padding:96px 0 88px;background:var(--cs-bg)}
+.cs-wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ---------- Header ---------- */
+.cs-head{display:flex;flex-wrap:wrap;gap:24px 48px;justify-content:space-between;align-items:flex-end;margin-bottom:36px}
+.cs-title{font-family:var(--cs-display);font-weight:800;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.05;letter-spacing:-.04em;margin:0;max-width:14ch}
+.cs-intro{max-width:44ch;color:var(--cs-muted);font-size:1.05rem;line-height:1.6;margin:0}
+
+/* ---------- Toolbar ---------- */
+.cs-bar{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;margin-bottom:28px}
+.cs-filters{display:flex;flex-wrap:wrap;gap:8px}
+.cs-chip{display:inline-flex;align-items:center;gap:8px;font:500 .92rem var(--cs-body);color:var(--cs-ink);background:var(--cs-surface);border:1.5px solid var(--cs-line);border-radius:999px;padding:9px 18px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.cs-chip:hover{border-color:var(--cs-ink)}
+.cs-chip[aria-pressed="true"]{background:var(--cs-ink);border-color:var(--cs-ink);color:#fff}
+.cs-nav{display:flex;align-items:center;gap:12px}
+.cs-count{font-size:.9rem;color:var(--cs-muted);min-width:4.5ch;text-align:right}
+.cs-arrow{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--cs-ink);background:var(--cs-surface);color:var(--cs-ink);display:grid;place-items:center;cursor:pointer;transition:background .2s,color .2s,opacity .2s}
+.cs-arrow:hover:not(:disabled){background:var(--cs-ink);color:#fff}
+.cs-arrow:disabled{opacity:.3;cursor:not-allowed}
+.cs-arrow svg{width:20px;height:20px}
+
+/* ---------- Carousel ---------- */
+.cs-viewport{margin:0 calc(50% - 50vw);padding:6px calc(50vw - 50%) 24px;}
+.cs-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 24px 24px;margin:0 -24px;scroll-padding:0 24px;scrollbar-width:none;cursor:grab}
+.cs-track::-webkit-scrollbar{display:none}
+.cs-track.is-drag{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;user-select:none}
+.cs-progress{height:4px;border-radius:4px;background:var(--cs-line);overflow:hidden;margin-top:8px}
+.cs-progress i{display:block;height:100%;width:30%;background:var(--cs-accent);border-radius:4px;transition:width .15s}
+
+/* ---------- Card ---------- */
+.cs-card{flex:0 0 clamp(290px,31vw,390px);scroll-snap-align:start;background:var(--cs-surface);border-radius:var(--cs-radius);overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--cs-line);transition:transform .25s,box-shadow .25s}
+.cs-card:hover{transform:translateY(-6px);box-shadow:0 22px 44px -22px rgba(18,24,58,.35)}
+.cs-cover{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,var(--c1),var(--c2));padding:22px;overflow:hidden}
+.dot{width:9px;height:9px;border-radius:50%;flex:none;display:inline-block}
+.cs-tag{display:inline-flex;align-items:center;gap:7px;position:absolute;top:16px;left:16px;z-index:2;background:rgba(255,255,255,.92);color:var(--cs-ink);font:600 .8rem var(--cs-body);padding:6px 12px;border-radius:999px}
+.cs-body{padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.cs-client{font-size:.88rem;color:var(--cs-muted);font-weight:500}
+.cs-name{font-family:var(--cs-display);font-weight:700;font-size:1.32rem;line-height:1.2;letter-spacing:-.015em;margin:0}
+.cs-sum{color:var(--cs-muted);font-size:.95rem;line-height:1.55;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cs-metrics{display:flex;gap:22px;margin:8px 0 4px;padding-top:16px;border-top:1px dashed var(--cs-line)}
+.cs-metrics b{display:block;font-family:var(--cs-display);font-size:1.6rem;letter-spacing:-.02em;color:var(--cs-accent);line-height:1}
+.cs-metrics span{font-size:.8rem;color:var(--cs-muted)}
+.cs-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:10px}
+.cs-time{font-size:.85rem;color:var(--cs-muted)}
+.cs-btn{font:600 .95rem var(--cs-body);background:var(--cs-accent);color:#fff;border:0;border-radius:999px;padding:11px 20px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .2s}
+.cs-btn:hover{background:var(--cs-ink)}
+.cs-btn:active{transform:scale(.97)}
+.cs-btn.ghost{background:transparent;color:var(--cs-ink);border:1.5px solid var(--cs-ink)}
+.cs-btn.ghost:hover{background:var(--cs-ink);color:#fff}
+.cs-btn svg{width:16px;height:16px}
+
+/* ---------- Mock UI drawn inside cover ---------- */
+.mk{position:absolute;inset:auto 22px 0 22px;top:64px;background:rgba(255,255,255,.96);border-radius:14px 14px 0 0;padding:14px;box-shadow:0 -8px 30px rgba(0,0,0,.15)}
+.mk-dots{display:flex;gap:5px;margin-bottom:12px}
+.mk-dots i{width:8px;height:8px;border-radius:50%;background:#D5D9EA}
+.mk-row{display:flex;gap:8px;margin-bottom:8px}
+.mk-b{height:10px;border-radius:6px;background:#E3E6F3}
+.mk-b.a{background:var(--c1);opacity:.9}
+.mk-bars{display:flex;align-items:flex-end;gap:6px;height:70px;margin-top:12px}
+.mk-bars i{flex:1;border-radius:5px 5px 0 0;background:var(--c1);opacity:.85}
+.mk-bars i:nth-child(even){background:var(--c2)}
+.mk-phone{position:absolute;left:50%;top:44px;transform:translateX(-50%);width:46%;bottom:-30px;background:#fff;border-radius:26px;padding:12px;box-shadow:0 10px 34px rgba(0,0,0,.25)}
+.mk-phone .mk-b{margin-bottom:8px}
+.mk-tile{height:54px;border-radius:12px;background:var(--c1);opacity:.85;margin:10px 0}
+.mk-tile.b{background:var(--c2);height:38px}
+
+/* ---------- Modal ---------- */
+.cs-modal{border:0;padding:0;background:transparent;max-width:min(1080px,94vw);width:100%;max-height:92vh;color:var(--cs-ink);font-family:var(--cs-body);overflow:visible}
+.cs-modal::backdrop{background:rgba(12,16,40,.62);backdrop-filter:blur(6px)}
+.cs-modal[open]{animation:pop .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+.cs-sheet{background:var(--cs-surface);border-radius:28px;overflow:hidden;max-height:92vh;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr)}
+.cs-side{position:relative;background:linear-gradient(135deg,var(--c1),var(--c2));min-height:360px;overflow:hidden}
+.cs-side .mk{top:90px}
+.cs-side .cs-tag{top:22px;left:22px}
+.cs-main{overflow-y:auto;padding:38px 38px 30px;max-height:92vh}
+.cs-x{position:absolute;top:14px;right:14px;z-index:5;width:42px;height:42px;border-radius:50%;border:0;background:var(--cs-ink);color:#fff;cursor:pointer;display:grid;place-items:center}
+.cs-x:hover{background:var(--cs-accent)}
+.cs-x svg{width:18px;height:18px}
+.cs-main h3{font-family:var(--cs-display);font-weight:800;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.08;letter-spacing:-.025em;margin:6px 0 16px}
+.cs-main h4{font-family:var(--cs-display);font-size:1.05rem;margin:26px 0 8px}
+.cs-main p{color:var(--cs-muted);line-height:1.65;margin:0}
+.cs-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 6px}
+.cs-facts div{background:var(--cs-bg);border-radius:14px;padding:12px 14px}
+.cs-facts small{display:block;color:var(--cs-muted);font-size:.78rem;margin-bottom:2px}
+.cs-facts strong{font-size:.95rem}
+.cs-res{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:6px}
+.cs-res div{border:1.5px solid var(--cs-line);border-radius:16px;padding:16px}
+.cs-res b{font-family:var(--cs-display);font-size:2rem;letter-spacing:-.03em;color:var(--cs-accent);display:block;line-height:1}
+.cs-res span{font-size:.85rem;color:var(--cs-muted)}
+.cs-list{margin:0;padding-left:1.1rem;color:var(--cs-muted);line-height:1.7}
+.cs-stack{display:flex;flex-wrap:wrap;gap:8px}
+.cs-stack span{background:var(--cs-accent-soft);color:var(--cs-accent);font-weight:600;font-size:.85rem;padding:6px 12px;border-radius:999px}
+.cs-quote{margin:26px 0 0;padding:20px 22px;border-radius:18px;background:var(--cs-ink);color:#fff}
+.cs-quote p{color:#fff;font-size:1.05rem;line-height:1.55}
+.cs-quote footer{margin-top:12px;font-size:.88rem;color:#B8BEE0}
+.cs-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:26px;padding-top:20px;border-top:1px solid var(--cs-line)}
+.cs-actions .sp{flex:1}
+.cs-step{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--cs-line);background:#fff;cursor:pointer;display:grid;place-items:center}
+.cs-step:hover{border-color:var(--cs-ink)}
+.cs-step svg{width:16px;height:16px}
+
+/* ---------- CTA strip ---------- */
+.cs-cta{margin-top:40px;background:var(--cs-ink);color:#fff;border-radius:var(--cs-radius);padding:30px 34px;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.cs-cta h3{font-family:var(--cs-display);font-size:1.5rem;margin:0 0 4px;letter-spacing:-.02em}
+.cs-cta p{margin:0;color:#B8BEE0}
+.cs-cta .cs-btn{background:var(--cs-gold);color:var(--cs-ink);font-weight:700;padding:14px 26px}
+.cs-cta .cs-btn:hover{background:#fff;color:var(--cs-ink)}
+.cs-cta :focus-visible{outline-color:var(--cs-gold)}
+
+:focus-visible{outline:3px solid var(--cs-accent);outline-offset:3px}
+@media (max-width:820px){
+  .cs{padding:64px 0}
+  .cs-sheet{grid-template-columns:1fr;overflow-y:auto}
+  .cs-side{min-height:230px}
+  .cs-main{max-height:none;overflow:visible;padding:26px 22px}
+  .cs-facts{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* ================= HERO BANNER STYLES ================= */
+/* =====================================================
+   SYNVORA IT – HERO BANNER
+   Color / font niche variable e ache.
+   ===================================================== */
+:root{
+  --hb-bg-1:#05070D;
+  --hb-bg-2:#0E1330;
+  --hb-ink:#EEF1FA;          /* headline: 17:1 on bg */
+  --hb-text:#A3ABC9;         /* paragraph + eyebrow: 8:1 on bg */
+  --hb-accent:#5B3DF5;
+  --hb-accent-hover:#7157FF;
+  --hb-gold:#FFC93C;
+  --hb-display:'Space Grotesk','Inter',system-ui,sans-serif;
+  --hb-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+
+.hb{
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:clamp(540px,72vh,700px);
+  display:flex;align-items:center;
+  background:linear-gradient(100deg,var(--hb-bg-1) 0%,var(--hb-bg-1) 30%,var(--hb-bg-2) 100%);
+  font-family:var(--hb-body);color:var(--hb-ink);
+}
+
+/* Soft glow with faint rings (right side) */
+.hb-glow{
+  position:absolute;z-index:-2;right:6%;top:6%;width:min(58vw,760px);aspect-ratio:1.55/1;
+  border-radius:50%;
+  background:
+    radial-gradient(ellipse closest-side,rgba(66,78,205,.34),rgba(66,78,205,.12) 55%,transparent 100%),
+    repeating-radial-gradient(ellipse closest-side,transparent 0 92px,rgba(130,140,255,.045) 93px 94px);
+  filter:blur(.4px);
+}
+/* Fine grid, fades out toward the text */
+.hb-grid{
+  position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(130,150,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(130,150,255,.07) 1px,transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:linear-gradient(90deg,transparent 8%,#000 62%);
+          mask-image:linear-gradient(90deg,transparent 8%,#000 62%);
+}
+/* Bottom fade so the banner blends into the next section */
+.hb::after{content:"";position:absolute;inset:auto 0 0 0;height:120px;z-index:-1;background:linear-gradient(transparent,rgba(5,7,13,.7))}
+
+.hb-wrap{width:100%;max-width:1240px;margin:0 auto;padding:96px 24px}
+.hb-copy{max-width:820px}
+
+.hb-eyebrow{margin:0 0 26px;font-size:1rem;color:var(--hb-text);letter-spacing:.005em}
+.hb-title{
+  margin:0 0 28px;font-family:var(--hb-display);font-weight:700;
+  font-size:clamp(2.5rem,6.2vw,4.7rem);line-height:1.03;letter-spacing:-.035em;color:var(--hb-ink);
+}
+.hb-title .ln{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}   /* mask for the slide-up reveal */
+.hb-title .ln>span{display:block}
+.hb-lead{margin:0;max-width:46ch;font-size:1.06rem;line-height:1.65;color:var(--hb-text)}
+
+.hb-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.hb-btn{display:inline-flex;align-items:center;justify-content:center;font:600 .98rem var(--hb-body);text-decoration:none;border-radius:999px;padding:14px 26px;transition:background .2s,border-color .2s,transform .2s}
+.hb-btn:active{transform:scale(.97)}
+.hb-btn.primary{background:var(--hb-accent);color:#fff;box-shadow:0 10px 30px -10px rgba(91,61,245,.8)}
+.hb-btn.primary:hover{background:var(--hb-accent-hover)}
+.hb-btn.ghost{color:var(--hb-ink);border:1.5px solid rgba(238,241,250,.3)}
+.hb-btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.hb-btn:focus-visible{outline:3px solid var(--hb-gold);outline-offset:3px}
+
+/* One orchestrated entrance: eyebrow → headline lines → paragraph → buttons */
+@keyframes hb-line{from{transform:translateY(108%);opacity:0}to{transform:none;opacity:1}}
+@keyframes hb-fade{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+.hb-eyebrow{animation:hb-fade .8s cubic-bezier(.2,.7,.1,1) both}
+.hb-title .ln>span{animation:hb-line 1s cubic-bezier(.2,.7,.1,1) both}
+.hb-title .ln:nth-child(1)>span{animation-delay:.15s}
+.hb-title .ln:nth-child(2)>span{animation-delay:.28s}
+.hb-title .ln:nth-child(3)>span{animation-delay:.41s}
+.hb-lead{animation:hb-fade .9s cubic-bezier(.2,.7,.1,1) .7s both}
+.hb-actions{animation:hb-fade .9s cubic-bezier(.2,.7,.1,1) .85s both}
+
+@media (min-width:641px){
+  .hb-title .ln{white-space:nowrap}   /* headline always breaks in exactly 3 lines */
+}
+@media (max-width:640px){
+  .hb-wrap{padding:72px 20px}
+  .hb-glow{right:-30%;top:0;width:120vw}
+  .hb-btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .hb *{animation:none!important;transition:none!important}
+}
+
+
+.cs-card-cover {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.cs-card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cs-modal-image {
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+}
+
+.cs-modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* =========================================
+   FILTERS
+========================================= */
+
+#csFilters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.cs-filter {
+    border: 1px solid #d7dbe7;
+    background: white;
+    padding: 8px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.cs-filter:hover {
+    border-color: #5b4bff;
+}
+
+.cs-filter.active {
+    background: #5b4bff;
+    color: white;
+    border-color: #5b4bff;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.cs-card {
+    flex: 0 0 390px;
+    width: 390px;
+
+    background: white;
+    border: 1px solid #dfe3ef;
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.cs-card-cover {
+    width: 100%;
+    height: 220px;
+
+    overflow: hidden;
+
+    background: #f3f4f8;
+
+    position: relative;
+}
+
+.cs-card-cover img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* No image */
+
+.cs-no-image {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #7a7f91;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   CARD BODY
+========================================= */
+
+.cs-card-body {
+    padding: 22px;
+}
+
+
+/* =========================================
+   TOP
+========================================= */
+
+.cs-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================
+   CATEGORY
+========================================= */
+
+.cs-tag {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 5px 10px;
+
+    border-radius: 999px;
+
+    background: #f0efff;
+
+    color: #5145cd;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   CLIENT
+========================================= */
+
+.cs-client {
+    color: #70768a;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.cs-card-title {
+    margin: 0 0 10px;
+
+    font-size: 24px;
+    line-height: 1.2;
+
+    color: #18213a;
+}
+
+
+/* =========================================
+   SUMMARY
+========================================= */
+
+.cs-card-summary {
+    margin: 0 0 20px;
+
+    color: #62697d;
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   META
+========================================= */
+
+.cs-card-meta {
+    display: flex;
+
+    gap: 30px;
+
+    margin-bottom: 20px;
+}
+
+.cs-meta-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.cs-meta-label {
+    color: #8a90a1;
+
+    font-size: 12px;
+}
+
+.cs-meta-item strong {
+    color: #202842;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   PREVIEW BUTTON
+========================================= */
+
+.cs-preview {
+    width: 100%;
+
+    padding: 11px 18px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: #5b4bff;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.cs-preview:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================
+   CAROUSEL
+========================================= */
+
+#csTrack {
+    display: flex;
+
+    gap: 24px;
+
+    overflow-x: auto;
+
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+}
+
+#csTrack::-webkit-scrollbar {
+    display: none;
+}
+
+#csTrack.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+}
+
+
+/* =========================================
+   MODAL IMAGE
+========================================= */
+
+.cs-modal-image {
+    width: 100%;
+    height: 350px;
+
+    overflow: hidden;
+
+    background: #f3f4f8;
+}
+
+.cs-modal-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.cs-modal-backdrop {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    overflow-y: auto;
+}
+
+.cs-modal-content {
+    width: min(900px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 20px;
+
+    position: relative;
+}
+
+.cs-modal-body {
+    padding: 30px;
+}
+
+.cs-modal-close {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    width: 38px;
+    height: 38px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    z-index: 5;
+}
+
+.cs-modal-top {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+}
+
+.cs-modal-body h2 {
+    margin: 0 0 10px;
+
+    font-size: 32px;
+}
+
+.cs-modal-summary {
+    color: #686f82;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   MODAL FACTS
+========================================= */
+
+.cs-modal-facts {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin: 25px 0;
+}
+
+.cs-modal-facts > div {
+    padding: 15px;
+
+    background: #f6f7fb;
+
+    border-radius: 12px;
+}
+
+.cs-modal-facts span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #858b9c;
+
+    font-size: 12px;
+}
+
+.cs-modal-facts strong {
+    color: #202842;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   TECHNOLOGIES
+========================================= */
+
+.cs-tech-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.cs-tech {
+    padding: 6px 10px;
+
+    background: #f1f2f7;
+
+    border-radius: 7px;
+
+    color: #42495c;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   MODAL ACTIONS
+========================================= */
+
+.cs-modal-actions {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 30px;
+}
+
+.cs-modal-prev,
+.cs-modal-next {
+    padding: 10px 18px;
+
+    border: 1px solid #dfe2eb;
+
+    border-radius: 8px;
+
+    background: white;
+
+    cursor: pointer;
+}

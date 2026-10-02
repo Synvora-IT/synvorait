@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Case Studies | Synvora IT{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/case_study.css' %}">
+{% endblock css %}
+
+
+{% block content %}
+<!-- ================= 1. HERO BANNER ================= -->
+<section class="hb" aria-labelledby="hbTitle">
+  <div class="hb-glow" aria-hidden="true"></div>
+  <div class="hb-grid" aria-hidden="true"></div>
+
+  <div class="hb-wrap">
+    <div class="hb-copy">
+      <p class="hb-eyebrow">Case studies from Synvora IT</p>
+
+      <h1 class="hb-title" id="hbTitle">
+        <span class="ln"><span>We build products</span></span>
+        <span class="ln"><span>that solve real</span></span>
+        <span class="ln"><span>business problems</span></span>
+      </h1>
+
+      <p class="hb-lead">From online stores to secure platforms and redesigned apps, see how we turned real business challenges into measurable results.</p>
+
+      <div class="hb-actions">
+        <a class="hb-btn primary" href="{% url 'contact-us' %}">Start a project</a>
+        <a class="hb-btn ghost" href="#case-studies">View case studies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. CASE STUDIES ================= -->
+<section class="cs" id="case-studies" aria-labelledby="csHeading">
+  
+  {{cases|json_script:'cases'}}
+
+  <div class="cs-wrap">
+
+    <div class="cs-head">
+      <h2 class="cs-title" id="csHeading">Real projects. Measured results.</h2>
+      <p class="cs-intro">See how Synvora IT helped businesses launch faster, cut manual work and grow online. Open any card to read the full story.</p>
+    </div>
+
+    <div class="cs-bar">
+      <div class="cs-filters" id="csFilters" role="group" aria-label="Filter case studies"></div>
+      <div class="cs-nav">
+        <span class="cs-count" id="csCount" aria-live="polite"></span>
+        <button class="cs-arrow" id="csPrev" aria-label="Previous case studies">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button class="cs-arrow" id="csNext" aria-label="Next case studies">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="cs-track" id="csTrack" tabindex="0" aria-label="Case study cards"></div>
+    <div class="cs-progress" aria-hidden="true"><i id="csBar"></i></div>
+
+    <div class="cs-cta">
+      <div>
+        <h3>Have a similar problem?</h3>
+        <p>Tell us what you need. We reply within one working day.</p>
+      </div>
+      <a href="{% url 'contact-us' %}" class="cs-btn" style="text-decoration:none">Start your project</a>
+    </div>
+  </div>
+
+  <!-- Preview modal -->
+  <dialog class="cs-modal" id="csModal" aria-labelledby="mTitle">
+    <div class="cs-sheet" id="csSheet">
+      <button class="cs-x" id="csClose" aria-label="Close preview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="cs-side" id="mSide"></div>
+      <div class="cs-main" id="mMain"></div>
+    </div>
+  </dialog>
+</section>
+
+{% block js %}
+  <script src="{% static 'js/case_study.js' %}"></script>
+{% endblock js %}
+
+{% endblock content %}

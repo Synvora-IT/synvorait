@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+Login | Synvora IT
+{% endblock title %}
+
+{% block content %}
+
+<div class="form-wrapper">
+    <div class="form-container">
+            <div class="form-header">
+                <h2>Member Login</h2>
+            </div>
+
+            <form id="loginForm">
+                {% csrf_token %}
+                <!-- Name Field -->
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="username" placeholder="Enter Username" id="username" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Enter Password" id="password" required>
+                </div>
+
+                <p>Don't have an account? <a href="{% url 'signup' %}" style="color:blue;">Signup</a></p>
+
+                <!-- Submit Button -->
+                <button type="button" class="submit-btn" id="loginBtn" onclick="login()">Login</button>
+            </form>
+        </div>
+    </div>
+
+{% block js %}
+    <script src="{% static 'auth.js' %}"></script>
+{% endblock js %}
+{% endblock content %}

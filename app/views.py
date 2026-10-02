@@ -1,0 +1,272 @@
+from django.forms.models import model_to_dict
+from django.shortcuts import render , get_object_or_404 , redirect
+from .models import Technology , Industry , Review , Service , Solution , Project , Blog
+from django.views.decorators.http import require_GET
+from django.db.models import Prefetch
+from django.core.paginator import Paginator
+from .forms import BlogForm , ProjectForm , MessageForm
+from django.contrib import messages
+from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+import json
+from django.core import serializers
+
+@require_GET
+def index(request):
+    technologies = Technology.objects.all()
+
+    reviews = Review.objects.filter(is_active = True)
+
+    context = {
+        "technologies":technologies,
+
+        "reviews":reviews,
+
+    }
+
+    return render(request , "index.html" , context)
+
+
+@require_GET
+def get_industries(request):
+    industries = Industry.objects.all()
+    context = {"industries":industries}
+    return render(request , "industries.html" , context)
+
+@require_GET
+def get_solutions(request):
+    search = request.GET.get("search" , None)
+
+    solutions = Solution.objects.all()
+
+    if search:
+        solutions = solutions.filter(title__icontains = search)
+
+    paginator = Paginator(solutions , 20)
+
+    page = int(request.GET.get("page" , 1))
+
+    solutions = paginator.get_page(page)
+
+    context = {"solutions":solutions}
+
+    return render(request , "solutions.html" , context)
+
+@require_GET
+def solution_detail(request , slug):
+    solution = get_object_or_404(Solution , slug = slug)
+    return render(request , "solution-detail.html" , {"solution":solution})
+
+@require_GET
+def get_services(request):
+    search = request.GET.get("search" , None)
+
+    services = Service.objects.all()
+
+    if search:
+        services = services.filter(Q(title__icontains = search) | Q(solution__title__icontains = search))
+    
+    paginator = Paginator(services , 20)
+    
+    page = int(request.GET.get("page" , 1))
+    
+    services = paginator.get_page(page)
+    
+    context = {"services":services}
+    return render(request , "services.html" , context)
+
+@require_GET
+def service_detail(request , slug):
+    service = get_object_or_404(Service , slug = slug)
+    return render(request , "service-detail.html" , {"service":service})
+
+@require_GET
+def case_studies(request):
+
+    projects = (
+        Project.objects
+        .select_related("service")
+        .prefetch_related("technologies")
+    )
+
+    cases = []
+
+    for project in projects:
+
+        cases.append({
+            "id": project.id,
+            "slug": project.slug,
+
+            "client": project.client,
+
+            "title": project.title,
+
+            "summary": project.short_description,
+
+            "description": project.description,
+
+            # Service / Category
+            "cat": (
+                project.service.title
+                if project.service
+                else None
+            ),
+
+            # Single project image
+            "image": (
+                project.image.url
+                if project.image
+                else None
+            ),
+
+            # Technologies
+            "stack": list(
+                project.technologies.values_list(
+                    "name",
+                    flat=True
+                )
+            ),
+
+            "start_date": (
+                project.start_date.isoformat()
+                if project.start_date
+                else None
+            ),
+
+            "end_date": (
+                project.end_date.isoformat()
+                if project.end_date
+                else None
+            ),
+        })
+
+    context = {
+        "cases": cases
+    }
+
+    return render(
+        request,
+        "case_study.html",
+        context
+    )
+
+
+@require_GET
+def project_detail(request , slug):
+    project = get_object_or_404(Project , slug = slug)
+    return render(request , "project-detail.html" , {"project":project})
+
+def contact_us(request):
+    form = MessageForm()
+
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        form = MessageForm(data = data)
+
+        if form.is_valid():
+            return JsonResponse({"message":"Thanks for contact with us!" , "success":True})
+        else:
+            return JsonResponse({"message":"Please fill up the form correcyly" , "success":False})
+
+    return render(request , "contact-us.html" , {"form":form})
+
+@login_required(login_url = "login")
+def my_projects(request):
+
+    if request.user.user_type != 'teammate':
+        return redirect('index')
+
+    page = request.GET.get("page" , 1)
+
+    try:page = int(page)
+    except(ValueError , TypeError):page = 1
+
+    projects  = Project.objects.filter(user = request.user)
+
+    search = request.GET.get("search" , None)
+
+    if search:
+        projects = projects.filter(title__icontains = search)
+
+    paginator = Paginator(projects , 10)
+
+    projects = paginator.get_page(page)
+
+    context = {"projects":projects}
+
+    return render(request , "my-projects.html" , context)
+
+
+@login_required(login_url = "login")
+def add_project(request):
+    if request.user.user_type != 'teammate':
+        return redirect('index')
+    
+    form = ProjectForm()
+    
+    if request.method == "POST":
+        form = ProjectForm(data = request.POST , files = request.FILES)
+
+        if form.is_valid():
+            technologies = form.cleaned_data.pop("technologies")
+
+            project = form.save(commit = False)
+
+            project.user = request.user
+
+            project.save()
+
+            project.technologies.set(technologies)
+
+            return redirect("project-detail" , project.slug)
+
+    return render(request , "add-project.html" , {"form":form})            
+
+
+@require_GET
+def blogs(request):
+    search = request.GET.get("search" , None)
+
+    page = request.GET.get("page" , 1)
+
+    try:page = int(page)
+
+    except(ValueError , TypeError):page = 1
+
+    blogs = Blog.objects.all()
+
+    if search:
+        blogs = blogs.filter(Q(title__icontains = search) | Q(tags__title__icontains = search))
+
+    paginator = Paginator(blogs , 20)
+
+    blogs = paginator.get_page(page)
+
+    context = {"blogs":blogs}
+
+    return render(request , "blogs.html" , context)
+
+@require_GET
+def blog_detail(request , slug):
+    blog = get_object_or_404(Blog , slug = slug)
+
+    context = {"blog":blog}
+
+    return render(request , "blog-detail.html" , context)
+
+@login_required(login_url = "login")
+def create_blog(request):
+
+    form = BlogForm()
+
+    if request.method == "POST":
+        form = BlogForm(data = request.POST , files = request.FILES)
+
+        if form.is_valid():
+            blog = form.save(commit = False)
+            blog.user = request.user
+            blog.save()
+
+    return render(request , "create-blog.html" , {"form":form})

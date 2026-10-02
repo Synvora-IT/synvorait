@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  
+  <!-- HERO -->
+  <header class="hero">
+  
+    <svg class="hero-bg" viewBox="0 0 1280 700" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+          <path d="M52 0H0V52" fill="none" stroke="#1B2140" stroke-width="1"/>
+        </pattern>
+        <radialGradient id="glow" cx="72%" cy="18%" r="55%">
+          <stop offset="0%" stop-color="#3F51D9" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#3F51D9" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1280" height="700" fill="url(#grid)"/>
+      <rect width="1280" height="700" fill="url(#glow)"/>
+    </svg>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Digital product studio for ambitious teams</p>
+      <h1>
+        <span><em style="animation-delay:.08s">Building digital</em></span>
+        <span><em style="animation-delay:.2s">solutions that move</em></span>
+        <span><em style="animation-delay:.32s">businesses forward</em></span>
+      </h1>
+      <p>We design and develop scalable digital products that help businesses grow, automate, and innovate — from first sketch to production.</p>
+      <div class="hero-ctas">
+        <a href="{% url 'contact-us' %}" class="btn-primary">Start Your Project →</a>
+        <a href="{% url 'solutions' %}" class="btn-secondary">Explore Solutions</a>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <div class="wrap">
+        <span>{{info.location}}</span>
+        <span>Est. 2026</span>
+      </div>
+    </div>
+  </header>
+
+  {% if technologies %}
+  <!-- Technology -->
+  <div class="marquee-band">
+    <div class="marquee-track">
+      {% for technology in technologies %}<span>{{technology.name}}</span>{% endfor %}
+      <!-- <span></span> -->
+    </div>
+  </div>
+  {% endif %}
+
+  </br>
+
+  {% if clients %}
+  <!-- Clienrt -->
+  <div class="marquee-band">
+    <div class="marquee-track">
+      {% for client in clients %}<span>{{client.name}}</span>{% endfor %}
+      <!-- <span></span> -->
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if solutions %}
+  <!-- SOLUTIONS -->
+  <section>
+    <div class="wrap">
+      <div class="head-row">
+        <div>
+          <h2>Solutions built around your business</h2>
+          <p class="lede">From first line of code to full-scale platforms, we cover the ground your business needs to move fast.</p>
+        </div>
+      </div>
+      <div class="services-list">
+        {% for solution in solutions %}
+        <a href="{% url 'solution-detail' solution.slug %}">
+          <div class="service-row">
+            <div class="service-index">{{forloop.counter}}</div>
+            <a href="{% url 'solution-detail' solution.slug %}">
+              <div class="service-name">{{solution.title}}</div>
+            </a>
+            <div class="service-desc">{{solution.short_description}}</div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if industries %}
+  <!-- INDUSTRIES -->
+  <section style="padding-top:0;">
+    <div class="wrap industries-row">
+      <div>
+        <h2>Technology for every industry</h2>
+        <p class="lede">We're not built around one sector — our teams bring domain context to whatever you're building.</p>
+      </div>
+      <div class="tag-grid">
+        {% for industry in industries|slice:'10' %}
+          <a class="tag">{{industry.title}}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  {% endif %}
+
+  <!-- WHY -->
+  <section>
+    <div class="wrap">
+      <div class="head-row"><h2>Why businesses choose Synvora</h2></div>
+    </div>
+
+    <div class="why-wrapper">
+      <div class="why-strip">
+        <div class="why-item">
+          <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6L3 9l6-1 3-6z"/></svg>
+          <h3>Strategic Thinking</h3><p>We start with your business goals, not the tech stack.</p>
+        </div>
+        <div class="why-item">
+          <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+          <h3>Modern Technology</h3><p>Tools and frameworks chosen for longevity, not trend.</p>
+        </div>
+        <div class="why-item">
+          <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          <h3>User-Centered Design</h3><p>Every screen is built around the person using it.</p>
+        </div>
+        <div class="why-item">
+          <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+          <h3>Scalable Solutions</h3><p>Built to handle next year's load, not just this year's.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <h2>How a project unfolds</h2>
+      <div class="process-track" style="margin-top:56px;">
+        <div class="process-step"><div class="process-num">01</div><h3>Discover</h3><p>Understand the problem before touching a single tool.</p></div>
+        <div class="process-step"><div class="process-num">02</div><h3>Strategy</h3><p>Map the plan against real constraints and timelines.</p></div>
+        <div class="process-step"><div class="process-num">03</div><h3>Design</h3><p>Shape the experience around the people who'll use it.</p></div>
+        <div class="process-step"><div class="process-num">04</div><h3>Develop</h3><p>Build in the open, with visibility at every stage.</p></div>
+        <div class="process-step"><div class="process-num">05</div><h3>Launch</h3><p>Ship, monitor, and support what comes after.</p></div>
+      </div>
+    </div>
+  </section>
+
+  {% if reviews %}
+  <!-- TESTIMONIAL -->
+  <section>
+    <div class="wrap testimonial-wrap">
+
+      {% for review in reviews %}
+      <div class="quote-mark">"</div>
+      <blockquote>{{review.detail}}</blockquote>
+      <div class="who-row">
+        <div class="avatar">
+          {% if review.image %}
+            <img src="{{review.image.url}}" class="avatar"></img>
+          {% else %}
+            {{review.name|slice:'2'}}
+          {% endif %}
+        </div>
+        <div class="who-text"><div class="name">{{review.name}}</div><div class="co">{{review.occupation}}</div></div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="wrap">
+      <h2>Have a project in mind? Let's build it together.</h2>
+      <a href="mailto:{{info.email}}" class="final-link">{{info.email}} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
+
+
+
+  {% if services %}
+  <div class="bg-grid"></div>
+      <div class="bg-decoration bg-circle-1"></div>
+      <div class="bg-decoration bg-circle-2"></div>
+
+      <section class="section-wrapper">
+          <div class="section-header">
+              <span class="section-badge">IT Farm Solutions</span>
+              <h2 class="section-title" style="margin: 0 auto"><span>Our Core Services</span></h2>
+              <p class="section-subtitle">Comprehensive technology solutions to power your business infrastructure and drive digital transformation.</p>
+              <p class='text-right'><a href="{% url 'services' %}">View All Services &rarr;</a></p>
+          </div>
+
+          <div class="card-grid">
+
+            {% for service in services|slice:"4" %}
+              <!-- Card 1: UI/UX Design -->
+              <div class="card">
+                {% if service.banner %}
+                    <a href="{% url 'service-detail' service.slug %}"><div class="card-image-wrapper">
+                        <img src="{{service.banner.url}}" alt="UI/UX Design" class="card-image">
+                        <div class="card-image-overlay"></div>
+                        <!-- <div class="card-icon-badge">🎨</div> -->
+                    </div></a>
+                {% endif %}
+                  <div class="card-body">
+                      <span class="card-tag">{{service.solution}}</span>
+                      <a href="{% url 'service-detail' service.slug %}"><h3 >{{service.title}}</h3></a>
+                      <p class="card-description" style="color:#36454F">{{service.short_description}}</p>
+                      {% if service.technologies %}
+                        <div class="card-features">
+                          {% for technology in service.technologies.all|slice:'4' %}
+                            <span class="feature-chip" style="color: #708090">{{technology.name}}</span>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                  </div>
+              </div>
+            {% endfor %}
+              
+          </div>
+      </section>
+    
+  {% endif %}
+
+{% endblock content %}
