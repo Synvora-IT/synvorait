@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CustomUser, ActivationCode
+from .models import CustomUser, ActivationCode , TeamMember, Designation
 
 
 @admin.register(CustomUser)
@@ -19,6 +19,25 @@ class UserAdmin(admin.ModelAdmin):
         count = queryset.update(is_active = False)
         return self.message_user(request , message = f"Successfully marked {count} user as inactive")
 
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ["user", "started_from", "end_at", "is_active"]
+
+@admin.register(Designation)
+class DesignationAdmin(admin.ModelAdmin):
+    list_display = ["name" , "is_active"]
+
+    actions = ["mark_selected_designation_as_active" , "mark_selected_designation_as_inactive"]
+
+    @admin.action(description = "Mark selected designation(s) as active")
+    def mark_selected_designation_as_active(self, request , queryset, **kwargs):
+        count = queryset.update(is_active = True)
+        return self.message_user(request , message = f"Successfully marked {count} designation as active")
+    
+    @admin.action(description = "Mark selected designation(s) as inactive")
+    def mark_selected_designation_as_inactive(self, request , queryset, **kwargs):
+        count = queryset.update(is_active = False)
+        return self.message_user(request , message = f"Successfully marked {count} designation as inactive")
 
 @admin.register(ActivationCode)
 class ActivationCodeAdmin(admin.ModelAdmin):
