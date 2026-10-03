@@ -27,3 +27,41 @@ class UpdateInfoForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ["username", "first_name", "last_name", "image"]
+
+
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(
+        widget = forms.PasswordInput(
+            attrs = {
+                "type":"password",
+                "id":"password",
+                "name":"password",
+                "placeholder":"Enter Old Password",
+            }
+        ),
+        label_suffix = " "
+    )
+
+    new_password = forms.CharField(
+            widget = forms.PasswordInput(
+                attrs = {
+                    "type":"password",
+                    "id":"new_password",
+                    "name":"new_password",
+                    "placeholder":"Enter New Password"
+                }
+            ),
+            label_suffix = " "
+        )
+
+    confirm_password = forms.CharField(
+                widget = forms.PasswordInput(
+                    attrs = {
+                        "type":"password",
+                        "id":"confirm_password",
+                        "name":"confirm_password",
+                        "placeholder":"Confirm Password"
+                    }
+                ),
+                label_suffix = " "
+            )
