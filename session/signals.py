@@ -8,10 +8,18 @@ from threading import Thread
 
 from core.services.send_mail import EmailService
 
-from .models import ActivationCode
+from .models import ActivationCode, TeamMember
+
+from django.utils.timezone import now
 
 User = get_user_model()
 
+
+@receiver(signal = post_save , sender = User)
+def create_team_member(sender , instance , created , *args , **kwargs):
+    if not created and instance.user_type == "teammate":
+        team_mate = TeamMember.objects.create(user = instance , started_from = now().date())
+        return
 
 @receiver(signal = post_save , sender = User)
 def create_activation_key(sender , instance , created , *args , **kwargs):
