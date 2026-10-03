@@ -21,6 +21,31 @@ class CustomUser(AbstractUser):
     user_type = models.CharField(max_length = 20 , choices = UserRoles.choices , default = UserRoles.CLIENT)
 
 
+class Designation(models.Model):
+
+    name = models.CharField(max_length = 100)
+
+    is_active = models.BooleanField(default = True)
+
+    def __str__(self):
+        return self.name
+    
+class TeamMember(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, limit_choices_to = {"user_type": "teammate"})
+
+    started_from = models.DateField(blank = True , null = True)
+
+    desgination = models.ForeignKey(Designation, on_delete = models.SET_NULL, blank = True , null = True)
+
+    end_at = models.DateField(blank = True , null = True)
+
+    is_active = models.BooleanField(default = True)
+
+    def __str__(self):
+        return self.user.get_full_name()
+
+    class Meta:
+        ordering = ["is_active"]
 
 _expiry_date = expiry_date.generate_expiry_date(minutes = 20)
 
