@@ -35,7 +35,7 @@ class TeamMember(models.Model):
 
     started_from = models.DateField(blank = True , null = True)
 
-    desgination = models.ForeignKey(Designation, on_delete = models.SET_NULL, blank = True , null = True)
+    designation = models.ForeignKey(Designation, on_delete = models.SET_NULL, blank = True , null = True)
 
     end_at = models.DateField(blank = True , null = True)
 
