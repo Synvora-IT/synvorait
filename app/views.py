@@ -1,16 +1,13 @@
-from django.forms.models import model_to_dict
 from django.shortcuts import render , get_object_or_404 , redirect
 from .models import Technology , Industry , Review , Service , Solution , Project , Blog
 from django.views.decorators.http import require_GET
-from django.db.models import Prefetch
 from django.core.paginator import Paginator
 from .forms import BlogForm , ProjectForm , MessageForm
-from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
-from django.core import serializers
+from session.models import TeamMember
 
 @require_GET
 def index(request):
@@ -60,20 +57,14 @@ def solution_detail(request , slug):
 
 @require_GET
 def get_services(request):
-    search = request.GET.get("search" , None)
-
     services = Service.objects.all()
 
-    if search:
-        services = services.filter(Q(title__icontains = search) | Q(solution__title__icontains = search))
+    total_member = TeamMember.objects.filter(is_active = True).count()
+
+    total_project = Project.objects.all().count()
     
-    paginator = Paginator(services , 20)
-    
-    page = int(request.GET.get("page" , 1))
-    
-    services = paginator.get_page(page)
-    
-    context = {"services":services}
+    context = {"services":services , "total_member":total_member , "total_project":total_project}
+
     return render(request , "services.html" , context)
 
 @require_GET
@@ -156,6 +147,11 @@ def case_studies(request):
 def project_detail(request , slug):
     project = get_object_or_404(Project , slug = slug)
     return render(request , "project-detail.html" , {"project":project})
+
+@require_GET
+def our_team(request):
+    members = list(TeamMember.objects.filter(is_active = True).values("user__first_name" , "user__last_name" , "user__image","designation__name"))
+    return render(request , "our-team.html" , {"members":members})
 
 def contact_us(request):
     form = MessageForm()
