@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Team | Synvora IT{% endblock title %}
+
+{% block css %}
+    <link rel='stylesheet' href="{% static 'css/our-team.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<section class="team-banner">
+    <div class="wrap">
+      <span class="section-tag" style="display: inline-block; font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; background: var(--accent-soft); padding: 6px 14px; border-radius: 100px;">Our Crew</span>
+      <h1>Meet the Experts Behind <span>Synvora IT</span></h1>
+      <p>We are a dedicated collective of engineers, designers, and visionaries committed to transforming complex challenges into exceptional digital products.</p>
+    </div>
+  </section>
+  <section class="team-section">
+    <div class="wrap">
+
+      <!-- Carousel Container -->
+      <div class="team-carousel-wrapper">
+        <div class="team-track" id="teamTrack">
+          
+        </div>
+      </div>
+
+
+      <div class="carousel-dots" id="teamDots"></div>
+
+    </div>
+  </section>
+
+  {% block js %}
+    {{ members|json_script:"members-data" }}
+    <script src="{% static 'js/our-team.js' %}"></script>
+  {% endblock js %}
+  
+{% endblock content %}

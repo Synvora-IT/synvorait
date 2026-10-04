@@ -1,0 +1,111 @@
+/* Team Page Banner Styles */
+  .team-banner {
+    padding: 80px 0 60px 0;
+    text-align: center;
+    position: relative;
+    background: var(--surface, #ffffff);
+    border-bottom: 1px solid var(--line, #E4E2DC);
+    margin-bottom: 60px;
+  }
+  
+  .team-banner h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(36px, 4.5vw, 52px);
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .team-banner h1 span {
+    color: var(--accent, #3F51D9);
+  }
+
+  .team-banner p {
+    font-size: 16.5px;
+    color: var(--ink-soft, #5B6072);
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.65;
+  }
+
+
+/* Team Carousel & Grid Styles */
+  .team-section { padding: 80px 0 120px 0; overflow: hidden; }
+  
+  .team-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  .team-track {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+    width: 100%;
+  }
+
+  /* প্রতিটা পেজে একটি করে স্লাইড ব্লক থাকবে, যার ভেতর ৬টি কার্ড গ্রিড আকারে থাকবে */
+  .team-slide-group {
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 24px;
+    box-sizing: border-box;
+    padding: 4px;
+  }
+
+  .team-card {
+    background: var(--surface, #ffffff);
+    border: 1px solid var(--line, #E4E2DC);
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+  }
+  .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(63, 81, 217, 0.1);
+    border-color: var(--accent, #3F51D9);
+  }
+
+  .member-img-wrap {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 16px auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--accent, #3F51D9);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  }
+
+  /* Carousel Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  .carousel-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line, #E4E2DC);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .carousel-dots .dot.active {
+    background: var(--accent, #3F51D9);
+    width: 28px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .team-slide-group { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .team-slide-group { grid-template-columns: 1fr; }
+  }
