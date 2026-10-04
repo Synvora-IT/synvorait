@@ -21,7 +21,7 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
-    list_display = ["user", "started_from", "end_at", "is_active"]
+    list_display = ["user" , "designation", "started_from", "end_at", "is_active"]
 
 @admin.register(Designation)
 class DesignationAdmin(admin.ModelAdmin):
