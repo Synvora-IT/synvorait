@@ -208,9 +208,12 @@
                     </div></a>
                 {% endif %}
                   <div class="card-body">
-                      <span class="card-tag">{{service.solution}}</span>
+                      {% if service.solution %}
+                        <span class="card-tag">{{service.solution}}</span>
+                      {% endif %}
+
                       <a href="{% url 'service-detail' service.slug %}"><h3 >{{service.title}}</h3></a>
-                      <p class="card-description" style="color:#36454F">{{service.short_description}}</p>
+                      <p class="card-description" style="color:#36454F">{{service.short_description|slice:'120'}}</p>
                       {% if service.technologies %}
                         <div class="card-features">
                           {% for technology in service.technologies.all|slice:'4' %}
