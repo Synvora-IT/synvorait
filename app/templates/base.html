@@ -46,7 +46,7 @@
         <div class="dropdown" id="dd-services">
           <div class="dropdown-grid">
             {% for service in services %}
-              <a class="dropdown-item" href="#"><div class="name">{{service.title}}</div><div class="desc">{{service.short_description}}</div></a>
+              <a class="dropdown-item" href="#"><div class="name">{{service.title}}</div><div class="desc">{{service.short_description|slice:'100'}}</div></a>
             {% endfor %}
           </div>
           <div class="dropdown-foot"><a href="{% url 'services' %}">Explore all services →</a></div>
@@ -67,7 +67,7 @@
                 <a class="dropdown-item" href="#">
                   <div class="name">{{industry.title}}</div>
                   {% if industry.short_description %}
-                    <div class="desc">{{industry.short_description}}</div>
+                    <div class="desc">{{industry.short_description|slice:'100'}}</div>
                   {% endif %}
                 </a>
               {% endfor %}
@@ -80,6 +80,7 @@
       <li><a class="nav-link" href="{% url 'case-studies' %}">Case Study</a></li>
       <li><a class="nav-link" href="{% url 'blogs' %}">Blogs</a></li>
       <li><a class="nav-link" href="#">About</a></li>
+      <li><a class="nav-link" href="{% url 'our-team' %}">Our Team</a></li>
       <li><a class="nav-link" href="{% url 'contact-us' %}">Contact Us</a></li>
       {% if request.user.is_authenticated %}
 
