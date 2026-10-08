@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Synvora IT{% endblock title %}</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'images/logo-icon.png' %}">   
     {% block css %}
     {% endblock css %}
@@ -17,24 +17,6 @@
     </a>
     <ul class="nav-links">
       <li><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-
-      <!--Solutions-->
-      
-      {% if solutions %}
-      <li>
-        <button class="nav-toggle" data-dropdown="solutions">Solutions
-          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </button>
-        <div class="dropdown" id="dd-solutions">
-          <div class="dropdown-grid">
-            {% for solution in solutions %}
-              <a class="dropdown-item" href="#"><div class="name">{{solution.title}}</div><div class="desc">{{solution.short_description}}</div></a>
-            {% endfor %}
-          </div>
-          <div class="dropdown-foot"><a href="{% url 'solutions' %}">Explore all solutions →</a></div>
-        </div>
-      </li>
-      {% endif %}
 
       <!--Services -->
 
@@ -123,18 +105,6 @@
   <div class="mobile-panel" id="mobilePanel">
     <a class="m-link" href="{% url 'index' %}">Home</a>
 
-    {% if solutions %}
-      <div class="m-link m-toggle" data-target="m-solutions">Solutions
-        <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </div>
-
-      <div class="m-sub" id="m-solutions">
-        {% for solution in solutions %}
-          <a class="m-sub-item" href="{% url 'solution-detail' solution.slug %}">{{solution.title}}</a>
-        {% endfor %}
-      </div>
-    {% endif %}
-
     {% if industries %}
       <div class="m-link m-toggle" data-target="m-industries">Industries
         <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -170,14 +140,7 @@
         <div class="logo"><img src="{% static 'images/logo-full.png' %}" class='logo-footer'></div>
         <p>We design and develop digital products that help businesses grow, automate, and innovate.</p>
       </div>
-      {% if solutions %}
-      <div class="footer-col">
-        <h4>Solutions</h4>
-        {% for solution in solutions %}
-          <a href="{% url 'solution-detail' solution.slug %}">{{solution.title}}</a>
-        {% endfor %}
-      </div>
-      {% endif %}
+      
       <div class="footer-col">
         <h4>Company</h4>
         <a href="#">About</a>
@@ -185,6 +148,7 @@
         <a href="{% url 'industries' %}">Industries</a>
         <a href="{% url 'contact-us' %}">Contact Us</a>
       </div>
+      
       {% if info %}
       <div class="footer-col">
         <h4>Contact</h4>
