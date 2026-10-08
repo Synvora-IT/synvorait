@@ -1,4 +1,4 @@
-from .models import Message , Service , Country , Blog , Project , Solution
+from .models import Message , Blog , Project
 from django import forms 
 
 class MessageForm(forms.ModelForm):

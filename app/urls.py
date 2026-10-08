@@ -1,15 +1,11 @@
-from app.views import index , get_services , get_solutions , solution_detail , service_detail , contact_us , get_industries , blogs , blog_detail , create_blog , project_detail , case_studies , our_team
+from app.views import index , get_services , service_detail , contact_us , get_industries , blogs , blog_detail , create_blog , project_detail , case_studies , our_team
 
 from django.urls import path
 
 urlpatterns = [
     path("" , index , name = "index"),
 
-    path("solutions/" , get_solutions , name = "solutions"),
-
     path("services/" , get_services , name = "services"),
-
-    path("solution/<str:slug>/" , solution_detail , name = "solution-detail"),
 
     path("industries/" , get_industries , name = "industries"),
 

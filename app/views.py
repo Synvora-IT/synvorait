@@ -1,5 +1,5 @@
 from django.shortcuts import render , get_object_or_404 , redirect
-from .models import Technology , Industry , Review , Service , Solution , Project , Blog
+from .models import Technology , Industry , Review , Service , Project , Blog
 from django.views.decorators.http import require_GET
 from django.core.paginator import Paginator
 from .forms import BlogForm , ProjectForm , MessageForm
@@ -30,30 +30,6 @@ def get_industries(request):
     industries = Industry.objects.all()
     context = {"industries":industries}
     return render(request , "industries.html" , context)
-
-@require_GET
-def get_solutions(request):
-    search = request.GET.get("search" , None)
-
-    solutions = Solution.objects.all()
-
-    if search:
-        solutions = solutions.filter(title__icontains = search)
-
-    paginator = Paginator(solutions , 20)
-
-    page = int(request.GET.get("page" , 1))
-
-    solutions = paginator.get_page(page)
-
-    context = {"solutions":solutions}
-
-    return render(request , "solutions.html" , context)
-
-@require_GET
-def solution_detail(request , slug):
-    solution = get_object_or_404(Solution , slug = slug)
-    return render(request , "solution-detail.html" , {"solution":solution})
 
 @require_GET
 def get_services(request):

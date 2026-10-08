@@ -17,10 +17,6 @@ class TechnologyAdmin(admin.ModelAdmin):
 class IndustryAdmin(admin.ModelAdmin):
     list_display = ["title"]
 
-@admin.register(Solution)
-class SolutionAdmin(admin.ModelAdmin):
-    list_display = ["title" , "is_active"]
-
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ["title" , "is_active"]

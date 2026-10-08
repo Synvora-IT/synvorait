@@ -31,29 +31,6 @@ class Technology(models.Model):
     class Meta:
         verbose_name_plural = "Technologies"
 
-class Solution(models.Model):
-    slug = models.SlugField(blank = True , null = True)
-
-    title = models.CharField(max_length = 50)
-
-    banner = models.ImageField(upload_to = "solution_banners/" , blank = True , null = True)
-
-    short_description = models.CharField(max_length = 100)
-
-    description = SummernoteTextField(blank = True , null = True)
-
-    technologies = models.ManyToManyField(Technology , related_name = "solutions")
-
-    is_active = models.BooleanField(default = True)
-
-    def __str__(self):
-        return self.title
-
-    def save(self, *args , **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        return super().save(*args , **kwargs)
-
 
 class Service(models.Model):
     slug = models.SlugField(blank = True , null = True)
@@ -61,8 +38,6 @@ class Service(models.Model):
     title = models.CharField(max_length = 100)
 
     banner = models.ImageField(upload_to = "service_images/")
-
-    solution = models.ForeignKey(Solution , on_delete = models.CASCADE , blank = True , null = True)
 
     technologies = models.ManyToManyField(Technology , related_name = "services")
 
