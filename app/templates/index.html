@@ -159,29 +159,6 @@
     </div>
   </section>
 
-  {% if reviews %}
-  <!-- TESTIMONIAL -->
-  <section>
-    <div class="wrap testimonial-wrap">
-
-      {% for review in reviews %}
-      <div class="quote-mark">"</div>
-      <blockquote>{{review.detail}}</blockquote>
-      <div class="who-row">
-        <div class="avatar">
-          {% if review.image %}
-            <img src="{{review.image.url}}" class="avatar"></img>
-          {% else %}
-            {{review.name|slice:'2'}}
-          {% endif %}
-        </div>
-        <div class="who-text"><div class="name">{{review.name}}</div><div class="co">{{review.occupation}}</div></div>
-      </div>
-      {% endfor %}
-    </div>
-  </section>
-  {% endif %}
-
   <!-- FINAL CTA -->
   <section class="final-cta">
     <div class="wrap">
