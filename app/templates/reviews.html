@@ -181,13 +181,13 @@ Client Reviews | Synvora IT
 
 
         <!-- ==================== PAGINATION ==================== -->
-        {% if page_obj.paginator.num_pages > 1 %}
+        {% if reviews.paginator.num_pages > 1 %}
             <nav class="reviews-pagination" aria-label="Client reviews pagination">
 
-                {% if page_obj.has_previous %}
+                {% if reviews.has_previous %}
                     <a
                         class="pagination-arrow"
-                        href="?page={{ page_obj.previous_page_number }}#all-reviews"
+                        href="?page={{ reviews.previous_page_number }}#all-reviews"
                         aria-label="Previous page"
                     >
                         &larr;
@@ -202,8 +202,8 @@ Client Reviews | Synvora IT
 
 
                 <div class="pagination-numbers">
-                    {% for number in page_obj.paginator.page_range %}
-                        {% if number == page_obj.number %}
+                    {% for number in reviews.paginator.page_range %}
+                        {% if number == reviews.number %}
                             <span
                                 class="pagination-number active"
                                 aria-current="page"
@@ -223,10 +223,10 @@ Client Reviews | Synvora IT
                 </div>
 
 
-                {% if page_obj.has_next %}
+                {% if reviews.has_next %}
                     <a
                         class="pagination-arrow"
-                        href="?page={{ page_obj.next_page_number }}#all-reviews"
+                        href="?page={{ reviews.next_page_number }}#all-reviews"
                         aria-label="Next page"
                     >
                         <span>Next</span>
@@ -242,8 +242,8 @@ Client Reviews | Synvora IT
             </nav>
 
             <p class="pagination-info">
-                Showing {{ page_obj.start_index }}–{{ page_obj.end_index }}
-                of {{ page_obj.paginator.count }} reviews
+                Showing {{ reviews.start_index }}–{{ reviews.end_index }}
+                of {{ reviews.paginator.count }} reviews
             </p>
         {% endif %}
 
