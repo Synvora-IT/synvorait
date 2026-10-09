@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Client Reviews | Synvora IT
+{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/reviews.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<!-- ==================== HERO ==================== -->
+<section class="reviews-hero">
+    <div class="reviews-container">
+        <span class="reviews-eyebrow">CLIENT TESTIMONIALS</span>
+
+        <h1>
+            Trusted by Clients.<br>
+            <span>Proven Through Experience.</span>
+        </h1>
+
+        <p>
+            Discover what our clients say about working with Synvora IT.
+            Real feedback, meaningful partnerships, and technology that
+            makes a difference.
+        </p>
+
+        <a href="#all-reviews" class="reviews-hero-btn">
+            Explore Reviews
+            <span aria-hidden="true">&rarr;</span>
+        </a>
+    </div>
+
+    <div class="reviews-hero-decoration reviews-decoration-one"></div>
+    <div class="reviews-hero-decoration reviews-decoration-two"></div>
+</section>
+
+
+<!-- ==================== REVIEW SUMMARY ==================== -->
+<section class="reviews-summary">
+    <div class="reviews-container">
+        <div class="reviews-summary-card">
+
+            <div class="summary-item">
+                <span class="summary-label">Client Reviews</span>
+                <strong>{{ reviews.paginator.count }}</strong>
+                <p>Published feedback</p>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-item">
+                <span class="summary-label">Client Satisfaction</span>
+
+                {% if avg_rating %}
+                    <strong>{{ avg_rating.avg_rating }}/5.0</strong>
+                {% else %}
+                    <strong>—</strong>
+                {% endif %}
+
+                <div class="summary-stars" aria-label="Average client rating">
+                    {% for star in "12345" %}
+                        {% if avg_rating.avg_rating and forloop.counter <= avg_rating.avg_rating %}
+                            <span class="star-filled" aria-hidden="true">&#9733;</span>
+                        {% else %}
+                            <span class="star-empty" aria-hidden="true">&#9734;</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-item">
+                <span class="summary-label">Our Commitment</span>
+                <strong>100%</strong>
+                <p>Focused on client success</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ==================== ALL REVIEWS ==================== -->
+<section class="reviews-list-section" id="all-reviews">
+    <div class="reviews-container">
+
+        <div class="reviews-section-heading">
+            <div>
+                <span class="reviews-eyebrow">WHAT PEOPLE SAY</span>
+                <h2>Client Reviews</h2>
+                <p>Feedback from people who have worked with our team.</p>
+            </div>
+
+            <span class="reviews-count">
+                {{ reviews.paginator.count }} review{{ reviews.paginator.count|pluralize }}
+            </span>
+        </div>
+
+
+        <div class="reviews-grid">
+
+            {% for review in reviews %}
+                <article class="client-review-card">
+
+                    <div class="review-card-top">
+                        <div class="review-quote-icon" aria-hidden="true">
+                            &ldquo;
+                        </div>
+
+                        <div class="review-rating"
+                             aria-label="{{ review.rating }} out of 5 stars">
+                            {% for star in "12345" %}
+                                {% if forloop.counter <= review.rating %}
+                                    <span class="star-filled" aria-hidden="true">&#9733;</span>
+                                {% else %}
+                                    <span class="star-empty" aria-hidden="true">&#9734;</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="review-content">
+                        <p>{{ review.detail|linebreaksbr }}</p>
+                    </div>
+
+                    <div class="review-client">
+                        <div class="review-avatar">
+                            {% if review.image %}
+                                <img
+                                    src="{{ review.image.url }}"
+                                    alt="{{ review.name }}"
+                                    loading="lazy"
+                                >
+                            {% else %}
+                                <span aria-hidden="true">
+                                    {{ review.name|first|upper }}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <div class="review-client-info">
+                            <h3>{{ review.name }}</h3>
+
+                            {% if review.client_position %}
+                                <span>{{ review.occupation }}</span>
+                            {% endif %}
+
+                            {% if review.created_at %}
+                                <time datetime="{{ review.created_at|date:'Y-m-d' }}">
+                                    {{ review.created_at|date:"M d, Y" }}
+                                </time>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </article>
+
+            {% empty %}
+                <div class="reviews-empty-state">
+                    <div class="empty-state-icon" aria-hidden="true">
+                        &#9734;
+                    </div>
+
+                    <h3>No reviews yet</h3>
+                    <p>
+                        Client feedback will appear here once reviews are
+                        available.
+                    </p>
+
+                    <a href="{% url 'index' %}" class="reviews-back-btn">
+                        Back to Home
+                    </a>
+                </div>
+            {% endfor %}
+
+        </div>
+
+
+        <!-- ==================== PAGINATION ==================== -->
+        {% if page_obj.paginator.num_pages > 1 %}
+            <nav class="reviews-pagination" aria-label="Client reviews pagination">
+
+                {% if page_obj.has_previous %}
+                    <a
+                        class="pagination-arrow"
+                        href="?page={{ page_obj.previous_page_number }}#all-reviews"
+                        aria-label="Previous page"
+                    >
+                        &larr;
+                        <span>Previous</span>
+                    </a>
+                {% else %}
+                    <span class="pagination-arrow disabled" aria-disabled="true">
+                        &larr;
+                        <span>Previous</span>
+                    </span>
+                {% endif %}
+
+
+                <div class="pagination-numbers">
+                    {% for number in page_obj.paginator.page_range %}
+                        {% if number == page_obj.number %}
+                            <span
+                                class="pagination-number active"
+                                aria-current="page"
+                            >
+                                {{ number }}
+                            </span>
+                        {% else %}
+                            <a
+                                class="pagination-number"
+                                href="?page={{ number }}#all-reviews"
+                                aria-label="Page {{ number }}"
+                            >
+                                {{ number }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+
+                {% if page_obj.has_next %}
+                    <a
+                        class="pagination-arrow"
+                        href="?page={{ page_obj.next_page_number }}#all-reviews"
+                        aria-label="Next page"
+                    >
+                        <span>Next</span>
+                        &rarr;
+                    </a>
+                {% else %}
+                    <span class="pagination-arrow disabled" aria-disabled="true">
+                        <span>Next</span>
+                        &rarr;
+                    </span>
+                {% endif %}
+
+            </nav>
+
+            <p class="pagination-info">
+                Showing {{ page_obj.start_index }}–{{ page_obj.end_index }}
+                of {{ page_obj.paginator.count }} reviews
+            </p>
+        {% endif %}
+
+    </div>
+</section>
+
+
+<!-- ==================== CTA ==================== -->
+<section class="reviews-cta">
+    <div class="reviews-container">
+        <div class="reviews-cta-content">
+            <span class="reviews-eyebrow">LET'S WORK TOGETHER</span>
+
+            <h2>Your Project Could Be Our Next Success Story.</h2>
+
+            <p>
+                Have an idea or a challenge? Let's discuss how Synvora IT
+                can help your business move forward.
+            </p>
+
+            <a href="{% url 'contact-us' %}" class="reviews-cta-btn">
+                Get in Touch
+                <span aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
