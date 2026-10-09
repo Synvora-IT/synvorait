@@ -737,6 +737,55 @@
 
         @media (max-width: 1024px) { .testimonials-grid { grid-template-columns: 1fr; } }
 
+        
+        /* View All Reviews Button */
+
+        .testimonials-view-all {
+            display: flex;
+            justify-content: center;
+            margin-top: var(--space-8);
+        }
+
+        .btn-view-all {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+
+            padding: 14px 26px;
+
+            background: #3F51D9;
+            color: #fff;
+
+            border: 1px solid #3F51D9;
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .btn-view-all span {
+            font-size: 19px;
+            transition: transform 0.25s ease;
+        }
+
+        .btn-view-all:hover {
+            background: #303FB8;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(63, 81, 217, 0.2);
+        }
+
+        .btn-view-all:hover span {
+            transform: translateX(4px);
+        }
+
         /* ===== FINAL CTA ===== */
         .final-cta {
             padding: clamp(64px, 8vw, 120px) 0;
