@@ -161,7 +161,9 @@ def about_us(request):
 
     total_project = Project.objects.all().count()
 
-    context = {"total_member":total_member , "total_project":total_project}
+    reviews = Review.objects.all()[:3]
+
+    context = {"total_member":total_member , "total_project":total_project , "reviews":reviews}
 
     return render(request , "about-us.html" , context)
 
