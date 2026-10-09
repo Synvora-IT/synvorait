@@ -1,4 +1,4 @@
-from app.views import index , get_services , service_detail , contact_us , get_industries , blogs , blog_detail , create_blog , project_detail , case_studies , our_team , about_us
+from app.views import index , get_services , service_detail , contact_us , get_industries , blogs , blog_detail , create_blog , project_detail , case_studies , our_team , about_us , reviews
 
 from django.urls import path
 
@@ -26,6 +26,8 @@ urlpatterns = [
     path("contact-us/" , contact_us , name = "contact-us"),
 
     path("about-us/" , about_us , name = "about-us"),
+
+    path("reviews/" , reviews , name = "reviews"),
 
 ]
 
