@@ -1,0 +1,403 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    About Us
+{% endblock title %}
+    
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/about-us.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+    <main>
+        <!-- HERO SLIDER -->
+        <section class="hero-slider" id="heroSlider" aria-roledescription="carousel" aria-label="About Synvora IT">
+            <div class="slider-track">
+                <!-- Slide 1 -->
+                <div class="slide active" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                    <div class="slide-bg">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&h=900&fit=crop" alt="Professional workspace" loading="eager">
+                    </div>
+                    <div class="slide-overlay"></div>
+                    <div class="container">
+                        <div class="slide-content">
+                            <div class="slide-eyebrow">About Synvora IT</div>
+                            <h1>We engineer digital products that <span class="accent">move businesses</span> forward.</h1>
+                            <p class="slide-desc">Synvora IT is a software and technology partner that helps companies turn complex challenges into elegant, scalable digital solutions — built with intention, delivered with care.</p>
+                            <div class="slide-actions">
+                                <a href="{% url 'our-team' %}" class="btn btn-primary">
+                                    View Our Team
+                                    <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </a>
+                                <a href="{% url 'case-studies' %}" class="btn btn-secondary">View Our Work</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                    <div class="slide-bg">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=1600&h=900&fit=crop" alt="Team collaboration" loading="lazy">
+                    </div>
+                    <div class="slide-overlay"></div>
+                    <div class="container">
+                        <div class="slide-content">
+                            <div class="slide-eyebrow">Our Expertise</div>
+                            <h1>Turning ideas into <span class="accent">digital solutions</span> that scale.</h1>
+                            <p class="slide-desc">From custom software to cloud transformation, we deliver comprehensive technology services designed to help your business thrive in the digital landscape.</p>
+                            <div class="slide-actions">
+                                <a href="#services" class="btn btn-primary">
+                                    Explore Services
+                                    <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </a>
+                                <a href="#team" class="btn btn-secondary">Meet Our Team</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                    <div class="slide-bg">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&h=900&fit=crop" alt="Team working together" loading="lazy">
+                    </div>
+                    <div class="slide-overlay"></div>
+                    <div class="container">
+                        <div class="slide-content">
+                            <div class="slide-eyebrow">Team & Culture</div>
+                            <h1>Great work starts with great <span class="accent">collaboration</span>.</h1>
+                            <p class="slide-desc">We've built a culture that values creativity, collaboration, continuous learning, and thoughtful problem-solving. Our team brings together diverse perspectives to tackle complex challenges.</p>
+                            <div class="slide-actions">
+                                <a href="#values" class="btn btn-primary">
+                                    Our Values
+                                    <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </a>
+                                <a href="#process" class="btn btn-secondary">Our Process</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                    <div class="slide-bg">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&h=900&fit=crop" alt="Technology and innovation" loading="lazy">
+                    </div>
+                    <div class="slide-overlay"></div>
+                    <div class="container">
+                        <div class="slide-content">
+                            <div class="slide-eyebrow">Our Vision</div>
+                            <h1>Technology that moves your <span class="accent">business</span> forward.</h1>
+                            <p class="slide-desc">To become a trusted technology partner known for innovation, meaningful collaboration, and lasting digital impact. Let's build something meaningful together.</p>
+                            <div class="slide-actions">
+                                <a href="#cta" class="btn btn-primary">
+                                    Start a Conversation
+                                    <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </a>
+                                <a href="#" class="btn btn-secondary">Schedule a Call</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slider Counter -->
+            <div class="slider-counter" aria-hidden="true">
+                <span class="current" id="currentSlide">01</span>
+                <span>/</span>
+                <span>04</span>
+                <div class="slider-counter-line" id="counterLine"></div>
+            </div>
+
+            <!-- Slider Controls -->
+            <div class="slider-controls">
+                <div class="slider-dots" role="tablist" aria-label="Slide navigation">
+                    <button class="slider-dot active" role="tab" aria-selected="true" aria-label="Go to slide 1" data-slide="0"></button>
+                    <button class="slider-dot" role="tab" aria-selected="false" aria-label="Go to slide 2" data-slide="1"></button>
+                    <button class="slider-dot" role="tab" aria-selected="false" aria-label="Go to slide 3" data-slide="2"></button>
+                    <button class="slider-dot" role="tab" aria-selected="false" aria-label="Go to slide 4" data-slide="3"></button>
+                </div>
+                <div class="slider-arrows">
+                    <button class="slider-arrow" id="prevSlide" aria-label="Previous slide">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button class="slider-arrow" id="nextSlide" aria-label="Next slide">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHO WE ARE -->
+        <section class="section" aria-labelledby="who-heading">
+            <div class="container">
+                <div class="who-grid">
+                    <div class="who-visual reveal">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="Synvora IT team working together" loading="lazy">
+                    </div>
+                    <div class="who-content reveal reveal-delay-1">
+                        <div class="eyebrow">Who We Are</div>
+                        <h2 id="who-heading">A technology partner built on clarity, craft, and commitment.</h2>
+                        <p>Synvora IT is a software and IT solutions company that partners with growing businesses to design, build, and scale digital products. We work across web, mobile, cloud, and custom software — always with a focus on outcomes that matter.</p>
+                        <p>We believe great technology should feel invisible. It should solve real problems, remove friction, and open new possibilities for the people who use it every day.</p>
+                        <div class="pull-quote">
+                            <p>"We don't just write code. We engineer solutions that earn trust, drive growth, and stand the test of time."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="stats" aria-label="Company statistics">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item reveal">
+                        <div class="stat-number"><span class="count-up" data-target="{{total_project}}">{{total_project}}</span></div>
+                        <div class="stat-label">Projects Delivered</div>
+                    </div>
+
+                    {% comment %}
+                    <div class="stat-item reveal reveal-delay-1">
+                        <div class="stat-number"><span class="count-up" data-target="65">0</span>+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    {% endcomment %}
+                    <div class="stat-item reveal reveal-delay-2">
+                        <div class="stat-number"><span class="count-up" data-target="{{total_member}}">{{total_member}}</span></div>
+                        <div class="stat-label">Team Members</div>
+                    </div>
+                    {% comment %}
+                    <div class="stat-item reveal reveal-delay-3">
+                        <div class="stat-number"><span class="count-up" data-target="5">0</span>+</div>
+                        <div class="stat-label">Years of Experience</div>
+                    </div>
+                    {% endcomment %}
+                </div>
+            </div>
+        </section>
+
+        <!-- MISSION & VISION -->
+        <section class="section section-alt" aria-labelledby="mv-heading">
+            <div class="container">
+                <div class="section-header reveal" style="text-align:center; margin: 0 auto var(--space-12);">
+                    <div class="eyebrow centered">Our Purpose</div>
+                    <h2 class="section-title" id="mv-heading">What drives us forward.</h2>
+                    <p class="section-desc" style="margin: 0 auto;">Clear purpose and direction guide every decision we make and every solution we build.</p>
+                </div>
+                <div class="mv-grid">
+                    <div class="mv-card reveal">
+                        <div class="mv-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                        </div>
+                        <h3>Our Mission</h3>
+                        <p>To deliver thoughtful, reliable, and effective technology solutions that help businesses overcome challenges and achieve meaningful progress.</p>
+                    </div>
+                    <div class="mv-card reveal reveal-delay-1">
+                        <div class="mv-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
+                        <h3>Our Vision</h3>
+                        <p>To become a trusted technology partner known for innovation, meaningful collaboration, and lasting digital impact.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE VALUES -->
+        <section class="section" aria-labelledby="values-heading">
+            <div class="container">
+                <div class="section-header reveal" style="text-align:center; margin: 0 auto var(--space-12);">
+                    <div class="eyebrow centered">Our Values</div>
+                    <h2 class="section-title" id="values-heading">The principles behind our work.</h2>
+                    <p class="section-desc" style="margin: 0 auto;">Core values that shape our culture, guide our decisions, and define how we work with every client.</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card reveal">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>Integrity</h3>
+                        <p>Communicate honestly and act responsibly in every interaction and decision.</p>
+                    </div>
+                    <div class="value-card reveal reveal-delay-1">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <h3>Innovation</h3>
+                        <p>Embrace modern approaches and question the status quo to solve problems better.</p>
+                    </div>
+                    <div class="value-card reveal reveal-delay-2">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <h3>Quality</h3>
+                        <p>Build with craft and care. Every line of code, every pixel, every decision matters.</p>
+                    </div>
+                    <div class="value-card reveal">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3>Collaboration</h3>
+                        <p>Work as an extension of your team. Shared goals, transparent communication, real partnership.</p>
+                    </div>
+                    <div class="value-card reveal reveal-delay-1">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </div>
+                        <h3>Customer Success</h3>
+                        <p>Your success is our success. We measure our work by the impact it creates for you.</p>
+                    </div>
+                    <div class="value-card reveal reveal-delay-2">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        </div>
+                        <h3>Growth</h3>
+                        <p>Keep learning, keep improving. We grow when our clients grow.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE -->
+        <section class="section section-alt" aria-labelledby="why-heading">
+            <div class="container">
+                <div class="why-grid">
+                    <div class="why-visual reveal">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop" alt="Synvora IT team planning a project" loading="lazy">
+                    </div>
+                    <div class="why-content reveal reveal-delay-1">
+                        <div class="eyebrow">Why Choose Synvora</div>
+                        <h2 class="section-title" id="why-heading">More than technology. A better way to build.</h2>
+                        <p class="section-desc">We combine technical expertise with a people-centered approach to create solutions that truly matter.</p>
+                        <div class="why-list">
+                            <div class="why-item">
+                                <div class="why-check">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <div>
+                                    <h4>Strategic Thinking</h4>
+                                    <p>We start with your business goals, not the tech stack.</p>
+                                </div>
+                            </div>
+                            <div class="why-item">
+                                <div class="why-check">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <div>
+                                    <h4>Modern Technology</h4>
+                                    <p>Tools and frameworks chosen for longevity, not trend.</p>
+                                </div>
+                            </div>
+                            <div class="why-item">
+                                <div class="why-check">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <div>
+                                    <h4>User-Centered Design</h4>
+                                    <p>Every screen is built around the person using it.</p>
+                                </div>
+                            </div>
+                            <div class="why-item">
+                                <div class="why-check">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <div>
+                                    <h4>Scalable Solutions</h4>
+                                    <p>Built to handle next year's load, not just this year's.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="section" aria-labelledby="testimonials-heading">
+            <div class="container">
+                <div class="section-header reveal" style="text-align:center; margin: 0 auto var(--space-12);">
+                    <div class="eyebrow centered">Client Reviews</div>
+                    <h2 class="section-title" id="testimonials-heading">What our clients say.</h2>
+                    <p class="section-desc" style="margin: 0 auto;">Real feedback from businesses we've helped transform.</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="testimonial-text">"Synvora IT transformed our entire digital presence. Their team delivered beyond expectations with a web application that increased our conversions by 200%."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Michael Torres" class="testimonial-avatar" loading="lazy">
+                            <div>
+                                <h4>Michael Torres</h4>
+                                <span>CEO, TechFlow Inc.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card reveal reveal-delay-1">
+                        <div class="testimonial-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="testimonial-text">"Working with Synvora was a game-changer. Their mobile app solution streamlined our operations and the support team is always responsive and helpful."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Lisa Anderson" class="testimonial-avatar" loading="lazy">
+                            <div>
+                                <h4>Lisa Anderson</h4>
+                                <span>COO, RetailMax</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card reveal reveal-delay-2">
+                        <div class="testimonial-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="testimonial-text">"The cloud migration project was handled flawlessly. Zero downtime, improved performance, and 40% cost reduction. Highly recommend Synvora IT."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="David Kim" class="testimonial-avatar" loading="lazy">
+                            <div>
+                                <h4>David Kim</h4>
+                                <span>CTO, DataStream</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="final-cta" id="cta" aria-labelledby="cta-heading">
+            <div class="container">
+                <div class="final-cta-content reveal">
+                    <h2 id="cta-heading">Let's build something meaningful together.</h2>
+                    <p>Have an idea, a challenge, or a digital product in mind? Let's discuss how Synvora IT can help you take the next step.</p>
+                    <a href="{% url 'contact-us' %}" class="btn btn-white">
+                        Start a Conversation
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% block js %}
+        <script src="{% static 'js/about-us.js' %}"></script>
+{% endblock js %}
+
+{% endblock content %}
