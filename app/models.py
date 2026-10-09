@@ -1,9 +1,15 @@
 from django.db import models
+
 from django_summernote.fields import SummernoteTextField
+
 from django.utils.text import slugify
+
 from django.core.exceptions import ValidationError
+
 from django_summernote.fields import SummernoteTextField
-from django.contrib.auth.models import User
+
+from django.core.validators import MinValueValidator , MaxValueValidator
+
 from django.conf import settings
 
 
@@ -97,6 +103,8 @@ class Review(models.Model):
     email = models.EmailField()
 
     detail = models.TextField()
+
+    rating = models.PositiveIntegerField(validators = [MinValueValidator(1) , MaxValueValidator(5)] , blank = True , null = True)
 
     occupation = models.CharField(max_length = 30 , blank = True , null = True)
 
