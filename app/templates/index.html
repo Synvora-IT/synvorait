@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block title %}
+  Synvora IT
+{% endblock title %}
+
+{% block css %}
+  <link rel='stylesheet' href="{% static 'style.css' %}">
+{% endblock css %}
+
 {% block content %}
   
   <!-- HERO -->
@@ -28,7 +38,7 @@
       <p>We design and develop scalable digital products that help businesses grow, automate, and innovate — from first sketch to production.</p>
       <div class="hero-ctas">
         <a href="{% url 'contact-us' %}" class="btn-primary">Start Your Project →</a>
-        <a href="{% url 'solutions' %}" class="btn-secondary">Explore Solutions</a>
+        <a href="{% url 'services' %}" class="btn-secondary">Explore Services</a>
       </div>
     </div>
     <div class="hero-foot">
