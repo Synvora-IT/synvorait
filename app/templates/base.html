@@ -60,10 +60,9 @@
       {% endif %}
 
       <li><a class="nav-link" href="{% url 'case-studies' %}">Case Study</a></li>
-      <li><a class="nav-link" href="{% url 'blogs' %}">Blogs</a></li>
-      <li><a class="nav-link" href="#">About</a></li>
       <li><a class="nav-link" href="{% url 'our-team' %}">Our Team</a></li>
       <li><a class="nav-link" href="{% url 'contact-us' %}">Contact Us</a></li>
+      <li><a class="nav-link" href="{% url 'about-us' %}">About Us</a></li>
       {% if request.user.is_authenticated %}
 
         <li>
@@ -116,9 +115,8 @@
       </div>
     {% endif %}
     <a class="m-link" href="#work">Case Study</a>
-    <a class="m-link" href="{% url 'blogs' %}">Blogs</a>
-    <a class="m-link" href="#">About</a>
     <a class="m-link" href="{% url 'contact-us' %}">Contact Us</a>
+    <a class="m-link" href="{% url 'about-us' %}">About Us</a>
     {% if request.user.is_authenticated %}
         <a href="{% url 'logout' %}" class="m-link">Logout <img src="{% static 'images/logout.png' %}" class='icon'></a>
       {% else %}
@@ -126,6 +124,24 @@
     {% endif %}
   </div>
 </nav>
+
+<!-- Django Messages -->
+{% if messages %}
+    <div class="message-container" id="messageContainer">
+        {% for message in messages %}
+            <div class="message-alert {{ message.tags }}" role="alert">
+                <span class="message-text">{{ message }}</span>
+
+                <button type="button"
+                        class="message-close"
+                        aria-label="Close message"
+                        onclick="this.parentElement.remove()">
+                    &times;
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 
 {% block content %}
 
