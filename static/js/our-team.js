@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             slideGroup.innerHTML += `
                 <div class="team-card">
                   <div class="member-img-wrap">
-                    <img src="/media/${member.user__image}" alt="${member.user__first_name} ${member.user__last_name}" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="${member.user__image ? `/media/${member.user__image}` : '/static/images/default-user.webp'}" alt="${member.user__first_name} ${member.user__last_name}" style="width: 100%; height: 100%; object-fit: cover;">
                   </div>
                   <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">${member.user__first_name} ${member.user__last_name}</h3>
                   <p style="font-size: 13px; font-weight: 600; color: var(--accent, #3F51D9); margin: 0;">${member.designation__name}</p>
