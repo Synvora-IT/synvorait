@@ -172,7 +172,7 @@ def reviews(request):
 
     avg_rating = user_reviews.aggregate(avg_rating = Avg("rating"))
 
-    paginator = Paginator(user_reviews , 20)
+    paginator = Paginator(user_reviews , 10)
 
     user_reviews = paginator.get_page(page)
 
