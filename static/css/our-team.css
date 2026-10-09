@@ -78,7 +78,6 @@
     margin: 0 auto 16px auto;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid var(--accent, #3F51D9);
     box-shadow: 0 10px 20px rgba(0,0,0,0.08);
   }
 
