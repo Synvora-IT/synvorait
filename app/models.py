@@ -187,7 +187,7 @@ class BlogTag(models.Model):
         super().save(*args , **kwargs)
 
 class Blog(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL , on_delete = models.SET_DEFAULT , default = "Admin" , related_name = "blogs")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL , on_delete = models.SET_NULL , null = True , related_name = "blogs")
 
     slug = models.SlugField(blank = True , null = True)
 
