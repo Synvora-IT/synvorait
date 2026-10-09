@@ -317,6 +317,7 @@
             </div>
         </section>
 
+        {% if review %}
         <!-- TESTIMONIALS -->
         <section class="section" aria-labelledby="testimonials-heading">
             <div class="container">
@@ -325,61 +326,25 @@
                     <h2 class="section-title" id="testimonials-heading">What our clients say.</h2>
                     <p class="section-desc" style="margin: 0 auto;">Real feedback from businesses we've helped transform.</p>
                 </div>
+
                 <div class="testimonials-grid">
+                    {% for review in reviews %}
                     <div class="testimonial-card reveal">
-                        <div class="testimonial-stars">
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        </div>
-                        <p class="testimonial-text">"Synvora IT transformed our entire digital presence. Their team delivered beyond expectations with a web application that increased our conversions by 200%."</p>
+                        <p class="testimonial-text">"{{review.detail}}"</p>
                         <div class="testimonial-author">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Michael Torres" class="testimonial-avatar" loading="lazy">
+                            <img src="{{review.image.url | default:"{% static 'images/default-user.webp' %}"}}" alt="Michael Torres" class="testimonial-avatar" loading="lazy">
                             <div>
-                                <h4>Michael Torres</h4>
-                                <span>CEO, TechFlow Inc.</span>
+                                <h4>{{review.name}}</h4>
+                                <span>{{review.occupation}}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-card reveal reveal-delay-1">
-                        <div class="testimonial-stars">
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        </div>
-                        <p class="testimonial-text">"Working with Synvora was a game-changer. Their mobile app solution streamlined our operations and the support team is always responsive and helpful."</p>
-                        <div class="testimonial-author">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Lisa Anderson" class="testimonial-avatar" loading="lazy">
-                            <div>
-                                <h4>Lisa Anderson</h4>
-                                <span>COO, RetailMax</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card reveal reveal-delay-2">
-                        <div class="testimonial-stars">
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        </div>
-                        <p class="testimonial-text">"The cloud migration project was handled flawlessly. Zero downtime, improved performance, and 40% cost reduction. Highly recommend Synvora IT."</p>
-                        <div class="testimonial-author">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="David Kim" class="testimonial-avatar" loading="lazy">
-                            <div>
-                                <h4>David Kim</h4>
-                                <span>CTO, DataStream</span>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
+                <div class="testimonials-view-all reveal"> <a href="{% url 'reviews' %}" class="btn-view-all"> View All Reviews <span aria-hidden="true">&rarr;</span> </a> </div>
             </div>
         </section>
+        {% endif %}
 
         <!-- FINAL CTA -->
         <section class="final-cta" id="cta" aria-labelledby="cta-heading">
