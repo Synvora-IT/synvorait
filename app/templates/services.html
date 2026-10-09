@@ -1,162 +1,195 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block title %}
-    Services | Synvora IT
+Services | Synvora IT
 {% endblock title %}
-    
-{% block css %}
-    <link rel='stylesheet' href="{% static 'css/services.css' %}">
-{% endblock css %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/services.css' %}">
+{% endblock css %}
+    
+    
 {% block content %}
-    <!-- OUR SERVICES -->
+
+    <!-- ============ SERVICES HERO ============ -->
+    <section class="services-hero">
+        <div class="container services-hero-container">
+
+            <div class="services-hero-content">
+                <span class="services-hero-badge">
+                    <span class="badge-dot"></span>
+                    OUR SERVICES
+                </span>
+
+                <h1>
+                    Digital services built
+                    <span>for modern businesses.</span>
+                </h1>
+
+                <p>
+                    We design, develop and deliver scalable digital solutions
+                    that help businesses grow, operate smarter, and stay ahead.
+                </p>
+
+                <div class="services-hero-actions">
+                    <a href="{% url 'contact-us' %}" class="services-hero-btn">
+                        Let's Work Together
+                        <span>→</span>
+                    </a>
+
+                    <a href="#services" class="services-hero-link">
+                        Explore Services
+                        <span>↓</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="services-hero-visual">
+
+                <div class="hero-orbit orbit-one"></div>
+                <div class="hero-orbit orbit-two"></div>
+                <div class="hero-orbit orbit-three"></div>
+
+                <div class="hero-center-card">
+                    <div class="hero-icon-grid">
+
+                        <div class="hero-icon">
+                            <span>&lt;/&gt;</span>
+                        </div>
+
+                        <div class="hero-icon">
+                            <span>✦</span>
+                        </div>
+
+                        <div class="hero-icon">
+                            <span>⌁</span>
+                        </div>
+
+                        <div class="hero-icon">
+                            <span>◈</span>
+                        </div>
+
+                    </div>
+
+                    <div class="hero-card-text">
+                        <strong>Digital Excellence</strong>
+                        <span>Design · Development · Innovation</span>
+                    </div>
+                </div>
+
+                <span class="hero-floating-dot dot-one"></span>
+                <span class="hero-floating-dot dot-two"></span>
+                <span class="hero-floating-dot dot-three"></span>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- OUR SERVICES (LIGHT - Reference Style) -->
     <section class="services-section" id="services">
         <div class="bg-shape bg-shape-1"></div>
         <div class="bg-shape bg-shape-2"></div>
         <div class="bg-shape bg-shape-3"></div>
         <div class="bg-shape bg-shape-4"></div>
 
-        <div class="wrap">
+        <div class="container">
             <div class="services-header">
                 <h2>Our <span>Services</span></h2>
-                <p class="lede">We deliver end-to-end technology solutions that drive growth, efficiency, and measurable impact for modern enterprises.</p>
+                <p>We deliver end-to-end technology solutions that drive growth, efficiency, and measurable impact for modern enterprises.</p>
             </div>
 
+            <div class="service-cards-wrapper">
             <div class="service-cards-grid">
                 
-                <!-- Card 1: UI/UX Design -->
-
                 {% for service in services %}
+                <!-- Card 1: UI/UX Design -->
                 <div class="service-card-ref">
-                    <h3>{{ service.title }}</h3>
+                    <h3>{{service.title}}</h3>
+                    {% if service.banner %}
                     <div class="mockup-preview">
-                        {% if service.banner %}
-                        <img src="{{ service.banner.url }}" alt="{{ service.title }}" class='banner'>
-                        {% else %}
-                            <div class="phone-mockup">
-                                <div class="phone-header"></div>
-                                <div class="phone-bar medium"></div>
-                                <div class="phone-block"></div>
-                                <div class="phone-bar short"></div>
-                            </div>
-                            <div class="phone-mockup">
-                                <div class="phone-header"></div>
-                                <div class="phone-bar short"></div>
-                                <div class="phone-block accent"></div>
-                                <div class="phone-bar medium"></div>
-                            </div>
-                            <div class="phone-mockup">
-                                <div class="phone-header"></div>
-                                <div class="phone-bar medium"></div>
-                                <div class="phone-block"></div>
-                                <div class="phone-bar short"></div>
-                            </div>
-                        {% endif %}
+                        <img src="{{service.banner.url}}" style="width:268.5px;height:201px">
                     </div>
-                    <p class="card-desc">{{service.short_description|slice:'200'}}</p>
-                    <button class="card-arrow">
+                    {% else %}
+                    <div class="mockup-preview">
+                        <div class="phone-mockup">
+                            <div class="phone-header"></div>
+                            <div class="phone-bar medium"></div>
+                            <div class="phone-block"></div>
+                            <div class="phone-bar short"></div>
+                        </div>
+                        <div class="phone-mockup">
+                            <div class="phone-header"></div>
+                            <div class="phone-bar short"></div>
+                            <div class="phone-block accent"></div>
+                            <div class="phone-bar medium"></div>
+                        </div>
+                        <div class="phone-mockup">
+                            <div class="phone-header"></div>
+                            <div class="phone-bar medium"></div>
+                            <div class="phone-block"></div>
+                            <div class="phone-bar short"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <p class="card-desc">{{service.short_description|slice:'95'}}</p>
+                    <a href="{% url 'service-detail' service.slug %}">
+                        <button class="card-arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                    </button>
+                        </button>
+                    </a>
                 </div>
-                
+
                 {% endfor %}
 
             </div>
-            
-        </div>
-    </section>
+            </div>
 
-    {% comment %}
-    <!-- STATS -->  
-    <section class="stats-section">
-        <div class="wrap">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">{{total_project}}</div>
-                    <div class="stat-label">Projects Delivered</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Client Satisfaction</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">{{total_member}}</div>
-                    <div class="stat-label">Expert Members</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">12+</div>
-                    <div class="stat-label">Years of Experience</div>
-                </div>
+            <div class="carousel-dots">
+                <button class="dot active"></button>
+                <button class="dot"></button>
+                <button class="dot"></button>
+                <button class="dot"></button>
             </div>
         </div>
     </section>
-    {% endcomment %}
-    <!-- WHY CHOOSE US -->
-    <section class="why-section">
-        <div class="wrap">
-            <div class="why-grid">
-                <div class="why-content">
-                    <span class="section-tag">Why Synvora</span>
-                    <h2>Built for teams that demand excellence</h2>
-                    <p>We're not just another agency. We're a strategic technology partner invested in your long-term success.</p>
-                    
-                    <div class="why-features">
-                        <div class="why-feature">
-                            <div class="why-feature-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            </div>
-                            <div>
-                                <h5>Senior Talent Only</h5>
-                                <p>Every engineer on your team has 5+ years of experience.</p>
-                            </div>
-                        </div>
-                        <div class="why-feature">
-                            <div class="why-feature-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                            </div>
-                            <div>
-                                <h5>On-Time Delivery</h5>
-                                <p>97% of our projects ship on or before schedule.</p>
-                            </div>
-                        </div>
-                        <div class="why-feature">
-                            <div class="why-feature-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                            </div>
-                            <div>
-                                <h5>Full-Stack Capability</h5>
-                                <p>Design, frontend, backend, and DevOps under one roof.</p>
-                            </div>
-                        </div>
-                        <div class="why-feature">
-                            <div class="why-feature-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                            </div>
-                            <div>
-                                <h5>Transparent Comms</h5>
-                                <p>Weekly demos, shared Slack, and real-time progress.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="why-visual">
-                    <div class="visual-card visual-card-1">
-                        <div class="label">Performance</div>
-                        <div class="value">99.9%</div>
-                        <div class="bar"><div class="bar-fill" style="width: 92%"></div></div>
-                    </div>
-                    <div class="visual-card visual-card-2">
-                        <div class="label">Client Score</div>
-                        <div class="value">4.9 / 5.0</div>
-                        <div class="bar"><div class="bar-fill" style="width: 98%"></div></div>
-                    </div>
-                    <div class="visual-card visual-card-3">
-                        <div class="label">Delivery Rate</div>
-                        <div class="value">On Time</div>
-                        <div class="bar"><div class="bar-fill" style="width: 97%"></div></div>
-                    </div>
+    <!-- PROCESS -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-head" style="text-align:center; max-width:680px; margin:0 auto 64px;">
+                <span class="section-tag">Our Process</span>
+                <h2>How we bring your vision to life</h2>
+                <p>A proven, transparent methodology that delivers results on time and on budget.</p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h4>Discover</h4>
+                    <p>Understand the problem before touching a single tool.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h4>Strategy</h4>
+                    <p>Map the plan against real constraints and timelines.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h4>Design</h4>
+                    <p>Shape the experience around the people who'll use it.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h4>Develop</h4>
+                    <p>Build in the open, with visibility at every stage.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">05</div>
+                    <h4>Launch</h4>
+                    <p>Ship, monitor, and support what comes after.</p>
                 </div>
             </div>
         </div>
@@ -164,12 +197,12 @@
 
     <!-- CTA -->
     <section class="cta-section">
-        <div class="wrap">
+        <div class="container">
             <div class="cta-box">
                 <div class="cta-content">
                     <h2>Ready to build something exceptional?</h2>
                     <p>Let's discuss your project and explore how Synvora can help you achieve your goals.</p>
-                    <a href="{% url 'contact-us' %}" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 100px; font-weight: 600;">
+                    <a href="{% url 'contact-us' %}" class="btn btn-primary">
                         Start a Project
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                     </a>
@@ -178,4 +211,9 @@
         </div>
     </section>
 
+
+{% block js %}
+    <script src="{% static 'js/services.js' %}"></script>
+{% endblock js %}
+    
 {% endblock content %}
