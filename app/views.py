@@ -1,13 +1,22 @@
 from django.shortcuts import render , get_object_or_404 , redirect
+
 from .models import Technology , Industry , Review , Service , Project , Blog
+
 from django.views.decorators.http import require_GET
+
 from django.core.paginator import Paginator
+
 from .forms import BlogForm , ProjectForm , MessageForm
+
 from django.db.models import Q
+
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-import json
+
 from session.models import TeamMember
+
+from django.contrib import messages
+
+from django.db.models import Avg
 
 @require_GET
 def index(request):
@@ -130,19 +139,44 @@ def our_team(request):
     return render(request , "our-team.html" , {"members":members})
 
 def contact_us(request):
+
     form = MessageForm()
 
     if request.method == "POST":
-        data = json.loads(request.body)
-
-        form = MessageForm(data = data)
+        form = MessageForm(request.POST)
 
         if form.is_valid():
-            return JsonResponse({"message":"Thanks for contact with us!" , "success":True})
+            form.save()
+            messages.success(request , "We've sent you a email")
+            return redirect("contact-us")
+
         else:
-            return JsonResponse({"message":"Please fill up the form correcyly" , "success":False})
+            messages.warning(request , "Invalid form")
 
     return render(request , "contact-us.html" , {"form":form})
+
+def about_us(request):
+
+    total_member = TeamMember.objects.filter(is_active = True).count()
+
+    total_project = Project.objects.all().count()
+
+    context = {"total_member":total_member , "total_project":total_project}
+
+    return render(request , "about-us.html" , context)
+
+def reviews(request):
+    page = request.GET.get("page" , 1)
+
+    user_reviews = Review.objects.filter(is_active = True).order_by("-created_at")
+
+    avg_rating = user_reviews.aggregate(avg_rating = Avg("rating"))
+
+    paginator = Paginator(user_reviews , 20)
+
+    user_reviews = paginator.get_page(page)
+
+    return render(request , "reviews.html" , {"reviews":user_reviews , "avg_rating":avg_rating})
 
 @login_required(login_url = "login")
 def my_projects(request):
