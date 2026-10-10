@@ -104,6 +104,17 @@
   <div class="mobile-panel" id="mobilePanel">
     <a class="m-link" href="{% url 'index' %}">Home</a>
 
+    {% if services %}
+      <div class="m-link m-toggle" data-target="m-industries">Services
+        <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="m-sub" id="m-industries">
+        {% for service in services %}
+          <a class="m-sub-item" href="{% url 'service-detail' service.slug %}">{{service.title}}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
     {% if industries %}
       <div class="m-link m-toggle" data-target="m-industries">Industries
         <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
