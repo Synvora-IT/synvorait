@@ -173,6 +173,15 @@
         <a href="#">{{info.location}}</a>
       </div>
       {% endif %}
+
+      {% if socials %}
+      <div class="footer-col">
+        <h4>Social Links</h4>
+        {% for social in socials %}
+          <a href="{{social.url}}">{{social.title}}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
     </div>
     
   </div>
