@@ -1,9 +1,8 @@
-from app.views import index , get_services , service_detail , contact_us , get_industries , blogs , blog_detail , create_blog , project_detail , case_studies , our_team , about_us , reviews
+from app.views import get_services , service_detail , contact_us , get_industries , blogs , blog_detail , create_blog , project_detail , case_studies , our_team , about_us , reviews
 
 from django.urls import path
 
 urlpatterns = [
-    path("" , index , name = "index"),
 
     path("services/" , get_services , name = "services"),
 
