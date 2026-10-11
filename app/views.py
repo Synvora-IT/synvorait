@@ -60,70 +60,33 @@ def service_detail(request , slug):
 @require_GET
 def case_studies(request):
 
+    page = request.GET.get("page", 1)
+
+    services = Service.objects.all()
+
+    service = request.GET.get("service" , None)
+
     projects = (
         Project.objects
         .select_related("service")
         .prefetch_related("technologies")
     )
 
-    cases = []
+    if service:
+        projects = projects.filter(service__slug = service)
 
-    for project in projects:
+    paginator = Paginator(projects , 10)
 
-        cases.append({
-            "id": project.id,
-            "slug": project.slug,
-
-            "client": project.client,
-
-            "title": project.title,
-
-            "summary": project.short_description,
-
-            "description": project.description,
-
-            # Service / Category
-            "cat": (
-                project.service.title
-                if project.service
-                else None
-            ),
-
-            # Single project image
-            "image": (
-                project.image.url
-                if project.image
-                else None
-            ),
-
-            # Technologies
-            "stack": list(
-                project.technologies.values_list(
-                    "name",
-                    flat=True
-                )
-            ),
-
-            "start_date": (
-                project.start_date.isoformat()
-                if project.start_date
-                else None
-            ),
-
-            "end_date": (
-                project.end_date.isoformat()
-                if project.end_date
-                else None
-            ),
-        })
+    projects = paginator.get_page(page)
 
     context = {
-        "cases": cases
+        "projects": projects,
+        "services":services,
     }
 
     return render(
         request,
-        "case_study.html",
+        "case-study.html",
         context
     )
 
