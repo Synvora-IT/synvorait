@@ -28,7 +28,7 @@
         <div class="dropdown" id="dd-services">
           <div class="dropdown-grid">
             {% for service in nav_services %}
-              <a class="dropdown-item" href="#"><div class="name">{{service.title}}</div><div class="desc">{{service.short_description|slice:'100'}}</div></a>
+              <a class="dropdown-item" href="{% url 'service-detail' service.slug %}"><div class="name">{{service.title}}</div><div class="desc">{{service.short_description|slice:'100'}}</div></a>
             {% endfor %}
           </div>
           <div class="dropdown-foot"><a href="{% url 'services' %}">Explore all services →</a></div>
