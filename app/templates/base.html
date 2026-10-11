@@ -20,14 +20,14 @@
 
       <!--Services -->
 
-      {% if services %}
+      {% if nav_services %}
       <li>
         <button class="nav-toggle" data-dropdown="services">Services
           <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </button>
         <div class="dropdown" id="dd-services">
           <div class="dropdown-grid">
-            {% for service in services %}
+            {% for service in nav_services %}
               <a class="dropdown-item" href="#"><div class="name">{{service.title}}</div><div class="desc">{{service.short_description|slice:'100'}}</div></a>
             {% endfor %}
           </div>
@@ -38,14 +38,14 @@
 
       <!--Industries-->
 
-      {% if industries %}
+      {% if nav_industries %}
         <li>
           <button class="nav-toggle" data-dropdown="industries">Industries
             <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </button>
           <div class="dropdown" id="dd-industries">
             <div class="dropdown-grid">
-              {% for industry in industries %}
+              {% for industry in nav_industries %}
                 <a class="dropdown-item" href="#">
                   <div class="name">{{industry.title}}</div>
                   {% if industry.short_description %}
@@ -104,7 +104,7 @@
   <div class="mobile-panel" id="mobilePanel">
     <a class="m-link" href="{% url 'index' %}">Home</a>
 
-    {% if services %}
+    {% if nav_services %}
       <div class="m-link m-toggle" data-target="m-industries">Services
         <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
@@ -115,17 +115,18 @@
       </div>
     {% endif %}
 
-    {% if industries %}
+    {% if nav_industries %}
       <div class="m-link m-toggle" data-target="m-industries">Industries
         <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
       <div class="m-sub" id="m-industries">
-        {% for industry in industries %}
+        {% for industry in nav_industries %}
           <a class="m-sub-item" href="#">{{industry.title}}</a>
         {% endfor %}
       </div>
     {% endif %}
     <a class="m-link" href="#work">Case Study</a>
+    <a class="m-link" href="{% url 'our-team' %}">Our Team</a>
     <a class="m-link" href="{% url 'contact-us' %}">Contact Us</a>
     <a class="m-link" href="{% url 'about-us' %}">About Us</a>
     {% if request.user.is_authenticated %}
