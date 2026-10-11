@@ -1,62 +1,141 @@
-{% extends 'base.html' %}
+
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}{{ service.title }} | Synvora IT{% endblock title %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/service-detail.css' %}">
+{% endblock css %}
+
 {% block content %}
 
-  <header class="page-banner" style="{% if service.banner %}background: linear-gradient(180deg, rgba(10, 13, 22, 0.75) 0%, rgba(10, 13, 22, 0.92) 100%), url('{{ service.banner.url }}') center/cover no-repeat;{% endif %} min-height: 480px;">
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-    
-    <div class="banner-container">
-      <div class="banner-content">
-        {% if service.solution %}
-          <div class="banner-badge">
-            <span class="badge-dot"></span>
-            {{ service.solution.title }} Solution
-          </div>
-        {% else %}
-          <div class="banner-badge">
-            <span class="badge-dot"></span>
-            Core IT Service
-          </div>
-        {% endif %}
+<!-- SERVICE HEADER -->
+<section class="sd-hero">
+    {% if service.banner %}
+        <div class="sd-hero-bg"
+             style="background-image: url('{{ service.banner.url }}');">
+        </div>
+    {% endif %}
 
-        <h1 class="banner-title">{{ service.title }}</h1>
-        <p class="banner-subtitle">{{ service.short_description }}</p>
-      </div>
+    <div class="sd-hero-overlay"></div>
+
+    <div class="sd-hero-content">
+        <div class="sd-container">
+            <nav class="sd-breadcrumb" aria-label="Breadcrumb">
+                <a href="{% url 'index' %}">Home</a>
+                <span>/</span>
+                <a href="{% url 'services' %}">Services</a>
+                <span>/</span>
+                <span class="sd-breadcrumb-current">
+                    {{ service.title }}
+                </span>
+            </nav>
+
+            <div class="sd-hero-copy">
+                <span class="sd-eyebrow">
+                    <span class="sd-eyebrow-dot"></span>
+                    Our Services
+                </span>
+
+                <h1>{{ service.title }}</h1>
+
+                {% if service.short_description %}
+                    <p>{{ service.short_description }}</p>
+                {% endif %}
+
+                <a href="{% url 'contact-us' %}" class="sd-hero-btn">
+                    Discuss Your Project
+                    <span aria-hidden="true">↗</span>
+                </a>
+            </div>
+        </div>
     </div>
-  </header>
 
-
-  {% if service.technologies.all %}
-  <div class="marquee-band">
-    <div class="marquee-track">
-    
-      {% for tech in service.technologies.all %}
-        <span>{{ tech.name }}</span>
-      {% endfor %}
-      
-      {% for tech in service.technologies.all %}
-        <span>{{ tech.name }}</span>
-      {% endfor %}
+    <div class="sd-hero-bottom">
+        <div class="sd-container">
+            <span>Strategy</span>
+            <span class="sd-bottom-line"></span>
+            <span>Technology</span>
+            <span class="sd-bottom-line"></span>
+            <span>Results</span>
+        </div>
     </div>
-  </div>
-  {% endif %}
+</section>
 
-  <section class="service-detail-section" style="padding: 60px 0 128px 0;">
-    <div class="wrap">
-      
-      <div class="head-row" style="margin-bottom: 24px;">
-        <h2>Service Overview & Details</h2>
-      </div>
 
-      <div class="service-detail-body" style="color:black">
-        {{ service.description|safe }}
-      </div>
+<!-- TECHNOLOGIES -->
+{% if service.technologies.all %}
+<section class="sd-technologies">
+    <div class="sd-container">
+        <div class="sd-tech-layout">
 
+            <div class="sd-tech-heading">
+                <span class="sd-section-label">OUR TOOLKIT</span>
+                <h2>Technologies <span>We Use</span></h2>
+                <p>
+                    The tools and technologies we use to deliver
+                    reliable, scalable and effective solutions.
+                </p>
+            </div>
+
+            <div class="sd-tech-list">
+                {% for technology in service.technologies.all %}
+                    <div class="sd-tech-card">
+                        {% if technology.image %}
+                            <img
+                                src="{{ technology.image.url }}"
+                                alt="{{ technology.name }} logo"
+                                loading="lazy"
+                            >
+                        {% endif %}
+
+                        <span>{{ technology.name }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
     </div>
-  </section>
+</section>
+{% endif %}
+
+
+<!-- SERVICE DESCRIPTION -->
+<section class="sd-description">
+    <div class="sd-container">
+        <div class="sd-description-layout">
+
+            <aside class="sd-description-aside">
+                <span class="sd-section-label">SERVICE OVERVIEW</span>
+                <h2>Built Around <span>Your Goals.</span></h2>
+
+                <div class="sd-aside-line"></div>
+
+                <p>
+                    Thoughtful solutions. Practical execution.
+                    Technology that moves your business forward.
+                </p>
+            </aside>
+
+            <article class="sd-description-content">
+                <div class="sd-description-heading">
+                    <span class="sd-description-number">01</span>
+                    <h2>{{ service.title }}</h2>
+                </div>
+
+                <div class="sd-description-body">
+                    {{ service.description|safe }}
+                </div>
+
+                <div class="sd-description-footer">
+                    <span class="sd-footer-dot"></span>
+                    <span>Designed for real-world impact</span>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
 
 {% endblock content %}
