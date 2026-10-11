@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Case Studies | Synvora IT{% endblock title %}
+
+{% block css %}
+    <link rel='stylesheet' href="{% static 'css/case-study.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<!-- CASE STUDIES HEADER -->
+<section class="cs-hero">
+    <div class="cs-container">
+
+        <div class="cs-breadcrumb">
+            <a href="{% url 'index' %}">Home</a>
+            <span>/</span>
+            <span>Case Studies</span>
+        </div>
+
+        <div class="cs-hero-content">
+            <span class="cs-eyebrow">OUR WORK</span>
+
+            <h1>
+                Turning Ideas Into
+                <span>Digital Success</span>
+            </h1>
+
+            <p>
+                Explore our case studies to discover how we help businesses
+                solve challenges through thoughtful design, modern development,
+                and reliable technology solutions.
+            </p>
+        </div>
+
+        <div class="cs-hero-bottom">
+            <span>Real Projects</span>
+            <span class="cs-hero-dot"></span>
+            <span>Practical Solutions</span>
+            <span class="cs-hero-dot"></span>
+            <span>Measurable Impact</span>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- CASE STUDIES SECTION -->
+<section class="cs-section">
+    <div class="cs-container">
+
+        <!-- SECTION HEADER -->
+        <div class="cs-section-heading">
+            <div>
+                <span class="cs-eyebrow">SELECTED PROJECTS</span>
+                <h2>Explore Our Work</h2>
+                <p>
+                    Discover the projects, solutions, and technologies
+                    behind our work.
+                </p>
+            </div>
+
+            <span class="cs-project-count">
+                {{ projects.paginator.count }} Projects
+            </span>
+        </div>
+
+
+        <!-- SERVICE FILTER -->
+        <form method="GET" class="cs-filter-form">
+
+            <div class="cs-filter-label">
+                <span class="cs-filter-icon">☷</span>
+                <span>Filter by service</span>
+            </div>
+
+            <div class="cs-filter-controls">
+
+                <select name="service" class="cs-service-select"
+                        aria-label="Filter projects by service">
+
+                    <option value="">All Services</option>
+
+                    {% for service in services %}
+                        <option value="{{ service.slug }}"
+                            {% if service == service.slug %}
+                                selected
+                            {% endif %}>
+                            {{ service.title }}
+                        </option>
+                    {% endfor %}
+
+                </select>
+
+                <button type="submit" class="cs-filter-btn">
+                    Apply Filter
+                </button>
+
+                {% if selected_service %}
+                    <a href="{% url 'case-studies' %}"
+                       class="cs-reset-btn">
+                        Reset
+                    </a>
+                {% endif %}
+
+            </div>
+
+        </form>
+
+
+        <!-- PROJECT GRID -->
+        {% if projects %}
+
+            <div class="cs-project-grid">
+
+                {% for project in projects %}
+
+                    <article class="cs-project-card">
+
+                        <a href="{% url 'project-detail' project.slug %}"
+                           class="cs-project-image">
+
+                            {% if project.image %}
+                                <img
+                                    src="{{ project.image.url }}"
+                                    alt="{{ project.title }}"
+                                    loading="lazy">
+                            {% else %}
+                                <div class="cs-image-placeholder">
+                                    <span>Project Preview</span>
+                                </div>
+                            {% endif %}
+
+                            <span class="cs-image-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+                        <div class="cs-project-content">
+
+                            <div class="cs-project-meta">
+                                {% if project.service %}
+                                    <span class="cs-service-tag">
+                                        {{ project.service.title }}
+                                    </span>
+                                {% endif %}
+
+                                {% if project.client %}
+                                    <span class="cs-project-client">
+                                        {{ project.client }}
+                                    </span>
+                                {% endif %}
+                            </div>
+
+
+                            <h3>
+                                <a href="{% url 'project-detail' project.pk %}">
+                                    {{ project.title }}
+                                </a>
+                            </h3>
+
+
+                            <p class="cs-project-description">
+                                {{ project.short_description|truncatechars:150 }}
+                            </p>
+
+
+                            <div class="cs-tech-list">
+                                {% for technology in project.technologies.all|slice:":4" %}
+                                    <span>{{ technology.name }}</span>
+                                {% endfor %}
+                            </div>
+
+
+                            <div class="cs-card-footer">
+                                <a href="{% url 'project-detail' project.pk %}"
+                                   class="cs-view-link">
+                                    View Case Study
+                                    <span>↗</span>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- PAGINATION -->
+            {% if projects.has_other_pages %}
+
+                <nav class="cs-pagination" aria-label="Project pagination">
+
+                    {% if projects.has_previous %}
+                        <a class="cs-page-arrow"
+                           href="?{% if request.GET.service %}service={{ request.GET.service }}&amp;{% endif %}page={{ projects.previous_page_number }}"
+                           aria-label="Previous page">
+                            ←
+                        </a>
+                    {% else %}
+                        <span class="cs-page-arrow disabled">←</span>
+                    {% endif %}
+
+
+                    {% for page_num in projects.paginator.page_range %}
+
+                        {% if page_num == projects.number %}
+
+                            <span class="cs-page-number active"
+                                  aria-current="page">
+                                {{ page_num }}
+                            </span>
+
+                        {% elif page_num >= projects.number|add:"-2" and page_num <= projects.number|add:"2" %}
+
+                            <a class="cs-page-number"
+                               href="?{% if request.GET.service %}service={{ request.GET.service }}&amp;{% endif %}page={{ page_num }}">
+                                {{ page_num }}
+                            </a>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+
+                    {% if projects.has_next %}
+                        <a class="cs-page-arrow"
+                           href="?{% if request.GET.service %}service={{ request.GET.service }}&amp;{% endif %}page={{ projects.next_page_number }}"
+                           aria-label="Next page">
+                            →
+                        </a>
+                    {% else %}
+                        <span class="cs-page-arrow disabled">→</span>
+                    {% endif %}
+
+                </nav>
+
+            {% endif %}
+
+
+        {% else %}
+
+            <!-- EMPTY STATE -->
+            <div class="cs-empty-state">
+
+                <div class="cs-empty-icon">⌕</div>
+
+                <h3>No Projects Found</h3>
+
+                <p>
+                    We couldn't find any projects for this service.
+                    Try another service or explore all our projects.
+                </p>
+
+                <a href="{% url 'case-studies' %}" class="cs-filter-btn">
+                    View All Projects
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock content %}
